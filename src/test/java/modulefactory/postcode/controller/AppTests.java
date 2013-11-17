@@ -1,5 +1,6 @@
-package mullae.module.postcode.controller;
+package modulefactory.postcode.controller;
 
+import modulefactory.postcode.config.WebContextConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +18,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration("file:src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml")
+@ContextConfiguration(classes = {WebContextConfig.class})
 public class AppTests {
     private MockMvc mockMvc;
 
@@ -32,7 +33,7 @@ public class AppTests {
 
     @Test
     public void simple() throws Exception {
-        mockMvc.perform(get("/"))
+        mockMvc.perform(get("/hello"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("hello"));
     }
