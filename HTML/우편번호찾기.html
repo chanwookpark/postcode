@@ -1,0 +1,74 @@
+<!doctype html>
+<meta charset="utf-8"> 
+<title>우편번호찾기</title>
+
+<form id="form1" class="form1" action="" method="">
+	<fieldset>
+		<legend>우편번호 목록</legend>
+
+		<span class="row">
+			<label for="select1" class="rowh">도로명주소</label>
+			<select name="select1" id="select1">
+				<option value="0">0</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+			</select>
+		</span>
+
+		<span class="row">
+			<label for="select2" class="rowh">도로명</label>
+			<select name="select2" id="select2">
+				<option value="0">0</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+			</select>
+		</span>
+
+		<span class="row">
+			<label for="input1" class="rowh">주소 입력</label>
+			<input type="text" name="input1" id="input1" value="주소키워드">
+		</span>
+	</fieldset>
+	<div>
+		<input type="submit" value="조회">
+		<a href="#" target="_blank">등록</a>
+		<a href="#" target="_blank">엑셀등록</a>
+	</div>
+</form>
+
+<hr>
+
+<table summary="테이블에 표현할 정보를 상세히 기술 - 도로명주소, 도로명, 키워드 입력을 통해 조회한 주소를 순번, 우편번호, 주소로 보여주는 테이블">
+	<caption>표1. 우편번호 검색</caption>
+	<thead>
+		<tr>
+			<th>순번</th>
+			<th>우편번호</th>
+			<th>주소</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>31</td>
+			<td>135-769</td>
+			<td>서울특별시 강남구 강남대로 358 - 0 KTB NETWORK</td>
+		</tr>
+		<tr>
+			<td>31</td>
+			<td>135-769</td>
+			<td>서울특별시 강남구 강남대로 358 - 0 KTB NETWORK</td>
+		</tr>
+	</tbody>
+</table>
+
+<hr>
+
+<nav class="paging controls">
+	<h1>페이징</h1>
+	<ol>
+		<li><a>1</a></li>
+		<li><a>2</a></li>
+		<li><a>3</a></li>
+		<li><a>4</a></li>
+	</ol>
+</nav>
