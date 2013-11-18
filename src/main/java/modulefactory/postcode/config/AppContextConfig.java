@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 
 
 @Configuration
-@ComponentScan(basePackages = {"modulefactory.postcode"}, excludeFilters = {@ComponentScan.Filter(value = {Controller.class, Configuration.class})})
+@ComponentScan(useDefaultFilters = true, basePackages = {"modulefactory.postcode"}, excludeFilters = {@ComponentScan.Filter(value = {Controller.class, Configuration.class})})
 public class AppContextConfig {
 
 }
