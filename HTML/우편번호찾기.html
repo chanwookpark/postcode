@@ -165,27 +165,27 @@
 			<caption></caption>
 			<tbody>
 				<tr>
-					<td>우편번호 <strong title="필수">*</strong></td>
+					<td class="rowh">우편번호 <strong title="필수">*</strong></td>
 					<td>100-013</td>
 				</tr>
 				<tr>
-					<td>시도명 <strong title="필수">*</strong></td>
+					<td class="rowh">시도명 <strong title="필수">*</strong></td>
 					<td>서울</td>
 				</tr>
 				<tr>
-					<td>시군구명 <strong title="필수">*</strong></td>
+					<td class="rowh">시군구명 <strong title="필수">*</strong></td>
 					<td>중구</td>
 				</tr>
 				<tr>
-					<td>읍면동명 <strong title="필수">*</strong></td>
+					<td class="rowh">읍면동명 <strong title="필수">*</strong></td>
 					<td>충무로3가</td>
 				</tr>
 				<tr>
-					<td><label for="">리건물명</label></td>
+					<td class="rowh"><label for="">리건물명</label></td>
 					<td><input type="text" name="" id=""></td>
 				</tr>
 				<tr>
-					<td><label for="">번지동호</label></td>
+					<td class="rowh"><label for="">번지동호</label></td>
 					<td><input type="text" name="" id=""></td>
 				</tr>
 			</tbody>
@@ -224,32 +224,52 @@
 
 
 
+<style>
+	.selectZipDetail {}
+	.selectZipDetail table {
+		width: 100%; 
+		border-collapse: collapse;
+	}
+	.selectZipDetail td {
+		padding: .5em; 
+		border-bottom: 1px solid #fff; 
+	}
+	.selectZipDetail .rowh {
+		width: 100px; 
+		text-align: right; 
+	}
+
+
+	.selectZipDetail td { background-color: #eee; }
+	.selectZipDetail .rowh { background-color: skyblue; }
+	.selectZipDetail .rowh strong { color: red; }
+</style>
 <section class="selectZipDetail">
 	<table>
 		<caption>우편번호 상세조회</caption>
 		<tbody>
 			<tr>
-				<td>우편번호 <strong title="필수">*</strong></td>
+				<td class="rowh">우편번호 <strong title="필수">*</strong></td>
 				<td>100-013</td>
 			</tr>
 			<tr>
-				<td>시도명 <strong title="필수">*</strong></td>
+				<td class="rowh">시도명 <strong title="필수">*</strong></td>
 				<td>서울</td>
 			</tr>
 			<tr>
-				<td>시군구명 <strong title="필수">*</strong></td>
+				<td class="rowh">시군구명 <strong title="필수">*</strong></td>
 				<td>중구</td>
 			</tr>
 			<tr>
-				<td>읍면동명 <strong title="필수">*</strong></td>
+				<td class="rowh">읍면동명 <strong title="필수">*</strong></td>
 				<td>충무로3가</td>
 			</tr>
 			<tr>
-				<td>리건물명 <strong title="필수">*</strong></td>
+				<td class="rowh">리건물명 <strong title="필수">*</strong></td>
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
-				<td>번지동호 <strong title="필수">*</strong></td>
+				<td class="rowh">번지동호 <strong title="필수">*</strong></td>
 				<td>&nbsp;</td>
 			</tr>
 		</tbody>
