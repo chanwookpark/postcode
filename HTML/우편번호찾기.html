@@ -1,14 +1,27 @@
 <!doctype html>
 <meta charset="utf-8"> 
-<title>우편번호찾기</title>
+<title>우편번호 주소찾기, 우편번호관리</title>
+<!-- <link rel="stylesheet" href="http://soopul.com/css/form/controller-0.1.css"> -->
+<style>
+	html, body {
+		font-size: small; 
+		font-family: Arial;
+		line-height: 1.4;
+	}
+	input, select {
+		font-size: 1em; 
+	}
+</style>
 
-<form id="form1" class="form1" action="" method="">
+
+
+<form id="" class="" action="" method="">
 	<fieldset>
-		<legend>우편번호 목록</legend>
+		<legend>우편번호 등록</legend>
 
 		<span class="row">
-			<label for="select1" class="rowh">도로명주소</label>
-			<select name="select1" id="select1">
+			<label for="" class="rowh">조건</label>
+			<select name="" id="">
 				<option value="0">0</option>
 				<option value="1">1</option>
 				<option value="2">2</option>
@@ -16,8 +29,8 @@
 		</span>
 
 		<span class="row">
-			<label for="select2" class="rowh">도로명</label>
-			<select name="select2" id="select2">
+			<label for="" class="rowh">조건</label>
+			<select name="" id="">
 				<option value="0">0</option>
 				<option value="1">1</option>
 				<option value="2">2</option>
@@ -25,8 +38,8 @@
 		</span>
 
 		<span class="row">
-			<label for="input1" class="rowh">주소 입력</label>
-			<input type="text" name="input1" id="input1" value="주소키워드">
+			<label for="" class="rowh">검색 키워드</label>
+			<input type="text" name="" id="" value="value">
 		</span>
 	</fieldset>
 	<div>
@@ -36,7 +49,6 @@
 	</div>
 </form>
 
-<hr>
 
 <table summary="테이블에 표현할 정보를 상세히 기술 - 도로명주소, 도로명, 키워드 입력을 통해 조회한 주소를 순번, 우편번호, 주소로 보여주는 테이블">
 	<caption>표1. 우편번호 검색</caption>
@@ -51,12 +63,12 @@
 		<tr>
 			<td>31</td>
 			<td>135-769</td>
-			<td>서울특별시 강남구 강남대로 358 - 0 KTB NETWORK</td>
+			<td><a>서울특별시 강남구 강남대로 358 - 0 KTB NETWORK</a></td>
 		</tr>
 		<tr>
 			<td>31</td>
 			<td>135-769</td>
-			<td>서울특별시 강남구 강남대로 358 - 0 KTB NETWORK</td>
+			<td><a>서울특별시 강남구 강남대로 358 - 0 KTB NETWORK</a></td>
 		</tr>
 	</tbody>
 </table>
@@ -66,9 +78,185 @@
 <nav class="paging controls">
 	<h1>페이징</h1>
 	<ol>
+		<li><a>처음으로</a></li>
+		<li><a>이전</li>
 		<li><a>1</a></li>
 		<li><a>2</a></li>
 		<li><a>3</a></li>
 		<li><a>4</a></li>
+		<li><a>뒤로</a></li>
+		<li><a>마지막으로</a></li>
 	</ol>
+
+	<!-- <p>
+		<a>1</a>
+		<a>2</a>
+		<a>3</a>
+		<a>4</a>
+	</p> -->
 </nav>
+
+
+
+
+
+<form id="" class="" action="" method="">
+	<fieldset>
+		<legend>우편번호 등록</legend>
+
+		<div class="row">
+			<label for="">
+				<span class="rowh">우편번호 <strong title="필수">*</strong></span>
+				<input type="text" name="" id="">
+				<span>* 우편번호의 '-'를 제외하고 입력하시오.</span>
+			</label>
+		</div>
+
+		<div class="row">
+			<label for="">
+				<span class="rowh">시도명 <strong title="필수">*</strong></span>
+				<input type="text" name="" id="">
+			</label>
+		</div>
+
+		<div class="row">
+			<label for="">
+				<span class="rowh">시군구명 <strong title="필수">*</strong></span>
+				<input type="text" name="" id="">
+			</label>
+		</div>
+
+		<div class="row">
+			<label for="">
+				<span class="rowh">읍면동명 <strong title="필수">*</strong></span>
+				<input type="text" name="" id="">
+			</label>
+		</div>
+
+		<div class="row">
+			<label for="">
+				<span class="rowh">리건물명</span>
+				<input type="text" name="" id="">
+			</label>
+		</div>
+
+		<div class="row">
+			<label for="">
+				<span class="rowh">번지동호</span>
+				<input type="text" name="" id="">
+			</label>
+		</div>
+	</fieldset>
+	<div>
+		<a href="#" title="우편번호 목록으로 이동">목록</a>
+		<input type="submit" value="저장">
+	</div>
+</form>
+
+
+
+
+
+
+<form id="" class="" action="" method="">
+	<fieldset>
+		<legend>우편번호 수정</legend>
+		<table>
+			<caption></caption>
+			<tbody>
+				<tr>
+					<td>우편번호 <strong title="필수">*</strong></td>
+					<td>100-013</td>
+				</tr>
+				<tr>
+					<td>시도명 <strong title="필수">*</strong></td>
+					<td>서울</td>
+				</tr>
+				<tr>
+					<td>시군구명 <strong title="필수">*</strong></td>
+					<td>중구</td>
+				</tr>
+				<tr>
+					<td>읍면동명 <strong title="필수">*</strong></td>
+					<td>충무로3가</td>
+				</tr>
+				<tr>
+					<td><label for="">리건물명</label></td>
+					<td><input type="text" name="" id=""></td>
+				</tr>
+				<tr>
+					<td><label for="">번지동호</label></td>
+					<td><input type="text" name="" id=""></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</fieldset>
+	<div>
+		<a href="#" title="우편번호 목록으로 이동">목록</a>
+		<input type="submit" value="저장">
+	</div>
+</form>
+
+
+
+
+
+
+
+<form id="" class="" action="" method="">
+	<fieldset>
+		<legend>우편번호 엑셀파일 등록</legend>
+
+		<div class="row">
+			<label for="">
+				<span class="rowh">우편번호 엑셀파일 <strong title="필수">*</strong></span>
+				<input type="file" name="" id="">
+			</label>
+		</div>
+	</fieldset>
+	<div>
+		<a href="#" title="우편번호 목록으로 이동">목록</a>
+		<input type="submit" value="저장">
+	</div>
+</form>
+
+
+
+
+<section class="selectZipDetail">
+	<table>
+		<caption>우편번호 상세조회</caption>
+		<tbody>
+			<tr>
+				<td>우편번호 <strong title="필수">*</strong></td>
+				<td>100-013</td>
+			</tr>
+			<tr>
+				<td>시도명 <strong title="필수">*</strong></td>
+				<td>서울</td>
+			</tr>
+			<tr>
+				<td>시군구명 <strong title="필수">*</strong></td>
+				<td>중구</td>
+			</tr>
+			<tr>
+				<td>읍면동명 <strong title="필수">*</strong></td>
+				<td>충무로3가</td>
+			</tr>
+			<tr>
+				<td>리건물명 <strong title="필수">*</strong></td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>번지동호 <strong title="필수">*</strong></td>
+				<td>&nbsp;</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="controls">
+		<a href="">수정</a>
+		<a href="">삭제</a>
+		<a href="">목록</a>
+	</div>
+</section>
