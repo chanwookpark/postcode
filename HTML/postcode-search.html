@@ -96,6 +96,7 @@
 				for(x in this.dataList) {
 					if(this.dataList[x] == null) {
 						alert('입력하지 않은 부분이 있습니다');
+						form.submit.disabled = false;
 						return false; 
 					}
 				}
