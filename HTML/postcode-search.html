@@ -74,6 +74,18 @@
 			address: ''
 		}
 	-->
+	<nav class="postcodeResults-nav">
+		<ul>
+			<li><a>처음</a></li>
+			<li><a>이전</a></li>
+			<li><a>1</a></li>
+			<li><a>2</a></li>
+			<li><a>3</a></li>
+			<li><a>4</a></li>
+			<li><a>다음</a></li>
+			<li><a>마지막</a></li>
+		</ul>
+	</nav>
 
 	<script>
 		/* postcodeSearch */
@@ -124,13 +136,13 @@
 			form.onsubmit = function() {
 				this.submit.disabled = true; 
 
-				for(x in this.dataList) {
-					if(this.dataList[x] == null) {
-						alert('입력하지 않은 부분이 있습니다');
-						form.submit.disabled = false;
-						return false; 
-					}
-				}
+				// for(x in this.dataList) {
+				// 	if(this.dataList[x] == null) {
+				// 		alert('입력하지 않은 부분이 있습니다');
+				// 		form.submit.disabled = false;
+				// 		return false; 
+				// 	}
+				// }
 
 				xhr({
 					type: "GET", 
