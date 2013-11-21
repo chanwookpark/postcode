@@ -16,7 +16,14 @@ input, select {
 }
 
 
-.postcodeSearch {}
-.postcodeSearch fieldset {}
-.postcodeSearch legend {}
-.postcodeSearch .rowh {}
+.postcodeSearchForm {}
+.postcodeSearchForm fieldset {}
+.postcodeSearchForm legend {}
+.postcodeSearchForm .row { display: block; }
+.postcodeSearchForm .rowh { display: inline-block; width: 80px; }
+
+
+
+.postcodeResults colgroup .order {}
+.postcodeResults colgroup .postcode {}
+.postcodeResults colgroup .address {}
