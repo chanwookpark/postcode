@@ -1,4 +1,4 @@
-package modulefactory.postcode.controller;
+package modulefactory.postcode.search;
 
 import modulefactory.postcode.config.WebContextConfig;
 import org.junit.Before;

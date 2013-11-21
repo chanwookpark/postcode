@@ -1,4 +1,4 @@
-package modulefactory.postcode.controller;
+package modulefactory.postcode.search;
 
 import modulefactory.postcode.model.PostCode;
 import modulefactory.postcode.service.PostCodeSearchService;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

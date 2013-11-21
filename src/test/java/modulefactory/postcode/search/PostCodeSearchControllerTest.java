@@ -1,4 +1,4 @@
-package modulefactory.postcode.controller;
+package modulefactory.postcode.search;
 
 import modulefactory.postcode.config.AppContextConfig;
 import modulefactory.postcode.config.WebContextConfig;
@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import static org.mockito.Mockito.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = {WebContextConfig.class, AppContextConfig.class})
+@Transactional
 public class PostCodeSearchControllerTest {
     private MockMvc mockMvc;
 
@@ -46,15 +48,15 @@ public class PostCodeSearchControllerTest {
     @Test
     public void simpleGet() throws Exception {
         when(service.search("문래")).thenReturn(new ArrayList<PostCode>(){{
-            add(new PostCode("150-701", "문래동1가"));
-            add(new PostCode("150-702", "문래동2가"));
-            add(new PostCode("150-703", "문래동3가"));
+            add(new PostCode("150701", "문래동1가"));
+            add(new PostCode("150702", "문래동2가"));
+            add(new PostCode("150703", "문래동3가"));
         }});
 
         mockMvc.perform(get("/postCode/search?address=문래").accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(jsonPath("$[0].postCode").value("150-701"))
+                .andExpect(jsonPath("$[0].postCode").value("150701"))
                 .andExpect(jsonPath("$[0].address").value("문래동1가"));
         ;
     }

@@ -1,4 +1,4 @@
-package modulefactory.postcode.controller;
+package modulefactory.postcode.search;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
