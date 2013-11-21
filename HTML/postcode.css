@@ -12,23 +12,25 @@ input, select {
 	margin: 0; 
 	padding: 0; 
 	font-size: 1em; 
-	vertical-align: middle; 
 }
 
+thead { background-color: #eee; }
+th, td { padding: .5em 1em; }
 
-.postcodeSearchForm {}
-.postcodeSearchForm fieldset {}
-.postcodeSearchForm legend {}
-.postcodeSearchForm .row { display: block; }
-.postcodeSearchForm .rowh { display: inline-block; width: 80px; }
+.postcodeSearch {}
 
+.form {}
+.form fieldset {}
+.form legend {}
+.form .row { display: block; }
+.form .rowh { display: inline-block; width: 80px; }
 
+.results {}
+.results caption { text-align: left; }
+.results colgroup .order {}
+.results colgroup .postcode {}
+.results colgroup .address {}
 
-.postcodeResults {}
-.postcodeResults colgroup .order {}
-.postcodeResults colgroup .postcode {}
-.postcodeResults colgroup .address {}
-
-.postcodeResults-nav {}
-.postcodeResults-nav ul { padding-left: 0; text-align: center; }
-.postcodeResults-nav li { display: inline; }
+.paging-nav {}
+.paging-nav ul { padding-left: 0; }
+.paging-nav li { display: inline; }
