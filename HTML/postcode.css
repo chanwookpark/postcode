@@ -1,36 +1,28 @@
-@charset "utf-8"; 
-
-/* dev reset CSS */
+@charset "utf-8";
 body {
-	font-size: small; 
-	font-family: Arial;
-	line-height: 1.4; 
-}
-
+  font-size: small;
+  font-family: Arial;
+  line-height: 1.4; }
 
 input, select {
-	margin: 0; 
-	padding: 0; 
-	font-size: 1em; 
-}
+  margin: 0;
+  padding: 0;
+  font-size: 1em; }
 
-thead { background-color: #eee; }
-th, td { padding: .5em 1em; }
+thead {
+  background-color: #eee; }
 
-.postcodeSearch {}
+th, td {
+  padding: .5em 1em; }
 
-.form {}
-.form fieldset {}
-.form legend {}
-.form .row { display: block; }
-.form .rowh { display: inline-block; width: 80px; }
-
-.results {}
-.results caption { text-align: left; }
-.results colgroup .order {}
-.results colgroup .postcode {}
-.results colgroup .address {}
-
-.paging-nav {}
-.paging-nav ul { padding-left: 0; }
-.paging-nav li { display: inline; }
+.postcodeSearch .form .row {
+  display: block; }
+.postcodeSearch .form .rowh {
+  display: inline-block;
+  width: 80px; }
+.postcodeSearch .results caption {
+  text-align: left; }
+.postcodeSearch .paging-nav ul {
+  padding-left: 0; }
+.postcodeSearch .paging-nav li {
+  display: inline; }
