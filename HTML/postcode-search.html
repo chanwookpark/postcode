@@ -4,38 +4,34 @@
 <link rel="stylesheet" href="./postcode.css">
 <script src="http://image.gsshop.com/deal/static/html/mc/script/lib/json2.js"></script>
 <script src="./res/xhr.js"></script>
-
+<h1>dev:우편번호 찾기</h1>
 
 <section class="postcodeSearch">
 	<h1>우편번호 목록</h1>
-	
 	<h2>조회</h2>
-
 	<form id="postcodeSearchForm" class="form" action="http://soopul.com" method="GET">
-
-		<label class="row">
-			<span class="rowh">도로명주소</span>
-			<select name="addrSelect1" id="addrSelect1">
-				<option value="v0">도로명주소</option>
-				<option value="v1">1</option>
-				<option value="v2">2</option>
-			</select>
-		</label>
-
-		<label class="row">
-			<span class="rowh">도로명</span>
-			<select name="addrSelect2" id="addrSelect2">
-				<option value="v0">도로명</option>
-				<option value="v1">1</option>
-				<option value="v2">2</option>
-			</select>
-		</label>
-
-		<label class="row">
-			<span class="rowh">도로명입력</span>
-			<input type="text" name="addrText" id="addrText" value="" placeholder="도로명 입력">
-		</label>
-
+		<p>
+			<label class="row">
+				<span class="rowh">도로명주소</span>
+				<select name="addrSelect1" id="addrSelect1">
+					<option value="v0">도로명주소</option>
+					<option value="v1">1</option>
+					<option value="v2">2</option>
+				</select>
+			</label>
+			<label class="row">
+				<span class="rowh">도로명</span>
+				<select name="addrSelect2" id="addrSelect2">
+					<option value="v0">도로명</option>
+					<option value="v1">1</option>
+					<option value="v2">2</option>
+				</select>
+			</label>
+			<label class="row">
+				<span class="rowh">도로명입력</span>
+				<input type="text" name="addrText" id="addrText" value="" placeholder="도로명 입력">
+			</label>
+		</p>
 		<p class="controls">
 			<input type="submit" id="submit" value="조회">
 			<a href="#" target="_blank">등록</a>
@@ -70,7 +66,7 @@
 		</tbody>
 	</table>
 
-	<nav class="paging-nav">
+	<nav class="paging-nav _conditional">
 		<h1>우편번호 검색 결과 페이지 이동</h1>
 		<ul>
 			<li><a>처음</a></li>
@@ -85,7 +81,6 @@
 	</nav>
 
 	<script>
-		/* postcodeSearch */
 		(function(doc, formID){
 			var form = form = doc.getElementById(formID);
 

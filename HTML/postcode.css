@@ -15,14 +15,31 @@ thead {
 th, td {
   padding: .5em 1em; }
 
-.postcodeSearch .form .row {
-  display: block; }
-.postcodeSearch .form .rowh {
-  display: inline-block;
-  width: 80px; }
-.postcodeSearch .results caption {
-  text-align: left; }
-.postcodeSearch .paging-nav ul {
-  padding-left: 0; }
-.postcodeSearch .paging-nav li {
-  display: inline; }
+._conditional {
+  /* 컨텐츠 양에 따라 노출될수도 그렇지 않을수도 있다 */
+  position: relative;
+  padding: 0 1em;
+  border: 1px dotted red; }
+  ._conditional::before {
+    content: "conditional";
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-weight: bold;
+    color: red; }
+
+.postcodeSearch {
+  padding: .5em 1em;
+  border-top: 1px dashed #ccc;
+  border-bottom: 1px dashed #ccc; }
+  .postcodeSearch .form .row {
+    display: block; }
+  .postcodeSearch .form .rowh {
+    display: inline-block;
+    width: 80px; }
+  .postcodeSearch .results caption {
+    text-align: left; }
+  .postcodeSearch .paging-nav ul {
+    padding-left: 0; }
+  .postcodeSearch .paging-nav li {
+    display: inline; }
