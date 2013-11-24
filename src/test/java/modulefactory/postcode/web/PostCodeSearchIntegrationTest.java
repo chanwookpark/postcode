@@ -15,6 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
@@ -42,6 +43,7 @@ public class PostCodeSearchIntegrationTest {
 
     @Autowired
     private StreetPostCodeRepository streetPostCodeRepository;
+    private ResultActions resultActions;
 
     @Before
     public void setup() {
@@ -50,11 +52,7 @@ public class PostCodeSearchIntegrationTest {
 
     @Test
     public void searchByAddress() throws Exception {
-        final ArrayList<PlainPostCodeAddress> postCodeAddresses = new ArrayList<PlainPostCodeAddress>();
-        postCodeAddresses.add(new PlainPostCodeAddress("150701", "서울특별시", "영등포구", "문래동1가", "우리벤처타운"));
-        postCodeAddresses.add(new PlainPostCodeAddress("150702", "서울특별시", "영등포구", "문래동2가", "우리벤처타운"));
-        postCodeAddresses.add(new PlainPostCodeAddress("150703", "서울특별시", "영등포구", "문래동3가", "우리벤처타운"));
-        plainPostCodeRepositoryrepository.save(postCodeAddresses);
+        plainPostCodeRepositoryrepository.save(getPlainAdressData(1));
 
         //like search
         mockMvc.perform(get("/postCode/search")
@@ -62,21 +60,17 @@ public class PostCodeSearchIntegrationTest {
                 .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(jsonPath("$[0].postCode").value("150701"))
+                .andExpect(jsonPath("$[0].postCode").value("150700"))
                 .andExpect(jsonPath("$[0].cityDoName").value("서울특별시"))
                 .andExpect(jsonPath("$[0].siGunGuName").value("영등포구"))
-                .andExpect(jsonPath("$[0].eupMyeonDongRiName").value("문래동1가"))
+                .andExpect(jsonPath("$[0].eupMyeonDongRiName").value("문래동0가"))
                 .andExpect(jsonPath("$[0].detailAddress").value("우리벤처타운"))
         ;
     }
 
     @Test
     public void searchByStreetAddress() throws Exception {
-        final List<StreetPostCodeAddress> postCodes = new ArrayList<StreetPostCodeAddress>();
-        postCodes.add(new StreetPostCodeAddress("135169", "서울특별시", "강남구", "강남대로", "150길", "좋은빌딩"));
-        postCodes.add(new StreetPostCodeAddress("135169", "서울특별시", "강남구", "강남대로", "150길", "110-10"));
-        postCodes.add(new StreetPostCodeAddress("136169", "서울특별시", "강남구", "강남대로", "160길", "나쁜빌딩"));
-        streetPostCodeRepository.save(postCodes);
+        streetPostCodeRepository.save(getStreetAdressData(1));
 
         //like search
         mockMvc.perform(get("/postCode/search")
@@ -84,7 +78,7 @@ public class PostCodeSearchIntegrationTest {
                 .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(jsonPath("$[0].postCode").value("135169"))
+                .andExpect(jsonPath("$[0].postCode").value("135100"))
                 .andExpect(jsonPath("$[0].cityDoName").value("서울특별시"))
                 .andExpect(jsonPath("$[0].siGunGuName").value("강남구"))
                 .andExpect(jsonPath("$[0].streetName").value("강남대로"))
@@ -93,4 +87,90 @@ public class PostCodeSearchIntegrationTest {
         ;
     }
 
+    @Test
+    public void searchStreetForPaging() throws Exception {
+
+        streetPostCodeRepository.save(getStreetAdressData(10));
+
+        resultActions = mockMvc.perform(
+                get("/postCode/search")
+                        .param("address", "강남대로")
+                        .param("addressType", "STREET")
+                        .param("_pageItemSize", "3")
+                        .param("_pageNumber", "0")
+        );
+        resultActions
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].postCode").value("135100"))
+                .andExpect(jsonPath("$[1].postCode").value("135101"))
+                .andExpect(jsonPath("$[2].postCode").value("135102"))
+        ;
+
+        mockMvc.perform(
+                get("/postCode/search")
+                        .param("address", "강남대로")
+                        .param("addressType", "STREET")
+                        .param("_pageItemSize", "3")
+                        .param("_pageNumber", "1")
+                )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].postCode").value("135103"))
+                .andExpect(jsonPath("$[1].postCode").value("135104"))
+                .andExpect(jsonPath("$[2].postCode").value("135105"))
+        ;
+
+        mockMvc.perform(
+                get("/postCode/search")
+                        .param("address", "강남대로")
+                        .param("addressType", "STREET")
+                        .param("_pageItemSize", "3")
+                        .param("_pageNumber", "2")
+        )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].postCode").value("135106"))
+                .andExpect(jsonPath("$[1].postCode").value("135107"))
+                .andExpect(jsonPath("$[2].postCode").value("135108"))
+        ;
+
+        mockMvc.perform(
+                get("/postCode/search")
+                        .param("address", "강남대로")
+                        .param("addressType", "STREET")
+                        .param("_pageItemSize", "3")
+                        .param("_pageNumber", "3")
+        )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].postCode").value("135109"))
+        ;
+    }
+
+    private List<PlainPostCodeAddress> getPlainAdressData(int size) {
+        final ArrayList<PlainPostCodeAddress> postCodeAddresses = new ArrayList<PlainPostCodeAddress>();
+        for (int i = 0; i < size; i++) {
+            String suffixPostCode = "";
+            //10보다 작을 때는 0을 붙여줘야 함
+            if (i < 10) {
+                suffixPostCode = "0" + i;
+            } else {
+                suffixPostCode = Integer.toString(i);
+            }
+            postCodeAddresses.add(new PlainPostCodeAddress("1507" + suffixPostCode, "서울특별시", "영등포구", "문래동" + i + "가", "우리벤처타운"));
+        }
+        return postCodeAddresses;
+    }
+
+    private List<StreetPostCodeAddress> getStreetAdressData(int size) {
+        final ArrayList<StreetPostCodeAddress> postCodeAddresses = new ArrayList<StreetPostCodeAddress>();
+        for (int i = 0; i < size; i++) {
+            String suffixPostCode = "";
+            //10보다 작을 때는 0을 붙여줘야 함
+            if (i < 10) {
+                suffixPostCode = "0" + i;
+            } else {
+                suffixPostCode = Integer.toString(i);
+            }
+            postCodeAddresses.add(new StreetPostCodeAddress("1351" + suffixPostCode, "서울특별시", "강남구", "강남대로", "15" + i + "길", "좋은빌딩"));
+        }
+        return postCodeAddresses;
+    }
 }

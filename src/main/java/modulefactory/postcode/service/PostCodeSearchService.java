@@ -1,6 +1,7 @@
 package modulefactory.postcode.service;
 
 import modulefactory.postcode.model.PostCodeAddress;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -13,5 +14,5 @@ import java.util.List;
  */
 public interface PostCodeSearchService {
 
-    List<PostCodeAddress> search(String address, String addressType);
+    Page<PostCodeAddress> search(String address, String addressType, int pageItemSize, int pageNumber);
 }

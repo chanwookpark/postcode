@@ -3,6 +3,7 @@ package modulefactory.postcode.web;
 import modulefactory.postcode.model.PostCodeAddress;
 import modulefactory.postcode.service.PostCodeSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +14,7 @@ import java.util.List;
 
 /**
  * 우편번호 찾기
+ *
  * @author chanwook
  */
 @Controller
@@ -26,20 +28,24 @@ public class PostCodeSearchController {
         this.searchService = searchService;
     }
 
-    @RequestMapping(value ={"/search/view"}, method = RequestMethod.GET)
-    public String viewSearchPage(){
+    @RequestMapping(value = {"/search/view"}, method = RequestMethod.GET)
+    public String viewSearchPage() {
 
         return "search/view";
     }
 
-    @RequestMapping(value ={"/search"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/search"}, method = RequestMethod.GET)
     @ResponseBody
-    public List<PostCodeAddress> searchPostCode(@RequestParam(value = "address") String address, String addressType){
+    public List<PostCodeAddress> searchPostCode(
+            @RequestParam(value = "address") String address, String addressType,
+            @RequestParam(value = "_pageItemSize", required = false, defaultValue = "0") int pageItemSize,
+            @RequestParam(value = "_pageNumber", required = false, defaultValue = "10") int pageNumber) {
 
         // Repository 조회 전에 파라미터 구성하기
-        final List<PostCodeAddress> postCodeAddresses = searchService.search(address, addressType);
+        final Page<PostCodeAddress> postCodeAddresses = searchService.search(address, addressType, pageItemSize, pageNumber);
 
-        return postCodeAddresses;
+        //TODO 우선 기능 돌아가게 하고 웹과의 페이징 나우젱..
+        return postCodeAddresses.getContent();
     }
 
 }

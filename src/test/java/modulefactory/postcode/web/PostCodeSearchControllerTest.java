@@ -9,6 +9,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -48,11 +51,12 @@ public class PostCodeSearchControllerTest {
 
     @Test
     public void simpleGet() throws Exception {
-        when(service.search("문래", "PLAIN")).thenReturn(new ArrayList<PostCodeAddress>(){{
+        Page<PostCodeAddress> page = new PageImpl<PostCodeAddress>(new ArrayList<PostCodeAddress>() {{
             add(new PlainPostCodeAddress("150701", "서울특별시", "영등포구", "문래동1가", "우리벤처타운"));
             add(new PlainPostCodeAddress("150702", "서울특별시", "영등포구", "문래동2가", "우리벤처타운"));
             add(new PlainPostCodeAddress("150703", "서울특별시", "영등포구", "문래동3가", "우리벤처타운"));
         }});
+        when(service.search("문래", "PLAIN", 0, 10)).thenReturn(page);
 
         mockMvc.perform(get("/postCode/web?address=문래&addressType=PLAIN").accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
                 .andExpect(status().isOk())

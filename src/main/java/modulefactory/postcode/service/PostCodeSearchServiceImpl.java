@@ -4,9 +4,10 @@ import modulefactory.postcode.model.PostCodeAddress;
 import modulefactory.postcode.repository.PlainPostCodeRepository;
 import modulefactory.postcode.repository.StreetPostCodeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -33,15 +34,22 @@ public class PostCodeSearchServiceImpl implements  PostCodeSearchService{
     }
 
     @Override
-    public List<PostCodeAddress> search(String address, String addressType) {
+    public Page<PostCodeAddress> search(String address, String addressType, int pageItemSize, int pageNumber) {
 
-        List<PostCodeAddress> postCodeAddressList = null;
+        Page<PostCodeAddress> postCodeAddressList = null;
+        //Paging 정보 구성하기
+        Pageable pageRequest = createPageable(pageItemSize, pageNumber);
         if("PLAIN".equals(addressType)){
-            postCodeAddressList = plainPostCodeRepository.findPostCode(address);
+            postCodeAddressList = plainPostCodeRepository.findPostCode(address, pageRequest);
         }else if("STREET".equals(addressType)){
-            postCodeAddressList = streetPostCodeRepository.findPostCode(address);
+            postCodeAddressList = streetPostCodeRepository.findPostCode(address, pageRequest);
         }
 
         return postCodeAddressList;
+    }
+
+    private Pageable createPageable(int pageItemSize, int pageNumber) {
+        PageRequest pageRequest = new PageRequest(pageNumber, pageItemSize);
+        return pageRequest;
     }
 }

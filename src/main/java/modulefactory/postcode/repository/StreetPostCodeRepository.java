@@ -3,6 +3,8 @@ package modulefactory.postcode.repository;
 import modulefactory.postcode.model.PlainPostCodeAddress;
 import modulefactory.postcode.model.PostCodeAddress;
 import modulefactory.postcode.model.StreetPostCodeAddress;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -20,5 +22,5 @@ public interface StreetPostCodeRepository extends JpaRepository<StreetPostCodeAd
                    " p.streetDetailName LIKE %:address% OR " +
                    " p.buildingName LIKE %:address% "
     )
-    List<PostCodeAddress> findPostCode(@Param("address") String address);
+    Page<PostCodeAddress> findPostCode(@Param("address") String address, Pageable pageRequest);
 }
