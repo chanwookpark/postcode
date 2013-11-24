@@ -1,6 +1,6 @@
 package modulefactory.postcode.service;
 
-import modulefactory.postcode.model.PostCode;
+import modulefactory.postcode.model.PostCodeAddress;
 
 import java.util.List;
 
@@ -12,5 +12,6 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public interface PostCodeSearchService {
-    List<PostCode> search(String address);
+
+    List<PostCodeAddress> search(String address, String addressType);
 }

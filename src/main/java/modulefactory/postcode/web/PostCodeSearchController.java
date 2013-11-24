@@ -1,6 +1,6 @@
-package modulefactory.postcode.search;
+package modulefactory.postcode.web;
 
-import modulefactory.postcode.model.PostCode;
+import modulefactory.postcode.model.PostCodeAddress;
 import modulefactory.postcode.service.PostCodeSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,12 +34,12 @@ public class PostCodeSearchController {
 
     @RequestMapping(value ={"/search"}, method = RequestMethod.GET)
     @ResponseBody
-    public List<PostCode> searchPostCode(@RequestParam(value = "address") String address){
+    public List<PostCodeAddress> searchPostCode(@RequestParam(value = "address") String address, String addressType){
 
         // Repository 조회 전에 파라미터 구성하기
-        final List<PostCode> postCodes = searchService.search(address);
+        final List<PostCodeAddress> postCodeAddresses = searchService.search(address, addressType);
 
-        return postCodes;
+        return postCodeAddresses;
     }
 
 }

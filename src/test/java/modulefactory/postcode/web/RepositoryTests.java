@@ -1,7 +1,7 @@
-package modulefactory.postcode.search;
+package modulefactory.postcode.web;
 
 import modulefactory.postcode.config.AppContextConfig;
-import modulefactory.postcode.repository.PostCodeRepository;
+import modulefactory.postcode.repository.PlainPostCodeRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ import static org.hamcrest.CoreMatchers.*;
 public class RepositoryTests {
 
     @Autowired
-    private PostCodeRepository repository;
+    private PlainPostCodeRepository repository;
 
     @Test
     public void configForJpa(){

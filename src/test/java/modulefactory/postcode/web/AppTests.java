@@ -1,5 +1,6 @@
-package modulefactory.postcode.search;
+package modulefactory.postcode.web;
 
+import modulefactory.postcode.config.AppContextConfig;
 import modulefactory.postcode.config.WebContextConfig;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +19,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = {WebContextConfig.class})
+@ContextConfiguration(classes = {WebContextConfig.class, AppContextConfig.class})
 public class AppTests {
     private MockMvc mockMvc;
 

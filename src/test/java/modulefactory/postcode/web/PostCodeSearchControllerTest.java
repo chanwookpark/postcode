@@ -1,8 +1,9 @@
-package modulefactory.postcode.search;
+package modulefactory.postcode.web;
 
 import modulefactory.postcode.config.AppContextConfig;
 import modulefactory.postcode.config.WebContextConfig;
-import modulefactory.postcode.model.PostCode;
+import modulefactory.postcode.model.PlainPostCodeAddress;
+import modulefactory.postcode.model.PostCodeAddress;
 import modulefactory.postcode.service.PostCodeSearchService;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,17 +48,20 @@ public class PostCodeSearchControllerTest {
 
     @Test
     public void simpleGet() throws Exception {
-        when(service.search("문래")).thenReturn(new ArrayList<PostCode>(){{
-            add(new PostCode("150701", "문래동1가"));
-            add(new PostCode("150702", "문래동2가"));
-            add(new PostCode("150703", "문래동3가"));
+        when(service.search("문래", "PLAIN")).thenReturn(new ArrayList<PostCodeAddress>(){{
+            add(new PlainPostCodeAddress("150701", "서울특별시", "영등포구", "문래동1가", "우리벤처타운"));
+            add(new PlainPostCodeAddress("150702", "서울특별시", "영등포구", "문래동2가", "우리벤처타운"));
+            add(new PlainPostCodeAddress("150703", "서울특별시", "영등포구", "문래동3가", "우리벤처타운"));
         }});
 
-        mockMvc.perform(get("/postCode/search?address=문래").accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+        mockMvc.perform(get("/postCode/web?address=문래&addressType=PLAIN").accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
                 .andExpect(jsonPath("$[0].postCode").value("150701"))
-                .andExpect(jsonPath("$[0].address").value("문래동1가"));
+                .andExpect(jsonPath("$[0].cityDoName").value("서울특별시"))
+                .andExpect(jsonPath("$[0].siGunGuName").value("영등포구"))
+                .andExpect(jsonPath("$[0].eupMyeonDongRiName").value("문래동1가"))
+                .andExpect(jsonPath("$[0].detailAddress").value("우리벤처타운"))
         ;
     }
 }

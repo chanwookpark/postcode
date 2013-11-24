@@ -35,7 +35,7 @@ element. -->
 
 <!-- By default, debug attribute is "null", meaning that we not do touch -->
 <!-- internal log4j logging settings. The "null" value for the threshold -->
-<!-- attribute can be misleading. The threshold field of a repository	 -->
+<!-- attribute can be misleading. The threshold field of a plainPostCodeRepository	 -->
 <!-- cannot be set to null. The "null" value for the threshold attribute -->
 <!-- simply means don't touch the threshold field, the threshold field   --> 
 <!-- keeps its old value.                                                -->
