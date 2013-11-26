@@ -48,7 +48,7 @@ public class PostCodeSearchController {
     @RequestMapping(value = {"/search"}, method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<PostCodeResource> searchPostCode(
-            @RequestParam(value = "address") String address, String addressType,
+            @RequestParam(value = "address") String address, @RequestParam(value = "addressType") String addressType,
             @RequestParam(value = "_pageItemSize", required = false, defaultValue = "10") int pageItemSize,
             @RequestParam(value = "_pageNumber", required = false, defaultValue = "0") int pageNumber) {
 
@@ -61,13 +61,12 @@ public class PostCodeSearchController {
 //        List<PostCodeResourceEntity> responseEntities = mapper.map(postCodeAddresses.getContent(), targetListType);
         List<PostCodeResourceEntity> responseEntities = mapToResourceEntity(addressData);
         PostCodeResource resource =
-                new PostCodeResource(responseEntities, new PageInformation(pageNumber, pageItemSize, addressData.getTotalElements(), addressData.getTotalPages()));
+                new PostCodeResource(responseEntities,
+                        new PageInformation(pageNumber, pageItemSize, addressData.getTotalElements(), addressData.getTotalPages()));
         resource.setAddressType(addressType);
 
         ResponseEntity<PostCodeResource> responseResource = new ResponseEntity<PostCodeResource>(resource, HttpStatus.OK);
 
-        //TODO 우선 기능 돌아가게 하고 웹과의 페이징 나우젱..
-//        return postCodeAddresses.getContent();
         return responseResource;
     }
 
