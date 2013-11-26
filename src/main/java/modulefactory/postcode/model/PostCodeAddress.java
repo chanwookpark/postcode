@@ -1,16 +1,19 @@
 package modulefactory.postcode.model;
 
+import org.hibernate.annotations.DiscriminatorOptions;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "POST_CODE_ADDRESS")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@Table(name = "POST_CODE_ADDR")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(
-        name="addressType",
-        discriminatorType=DiscriminatorType.STRING
+        name = "addressType",
+        discriminatorType = DiscriminatorType.STRING
 )
-public class PostCodeAddress implements Serializable{
+@DiscriminatorOptions(insert = true)
+public abstract class PostCodeAddress implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -76,4 +79,6 @@ public class PostCodeAddress implements Serializable{
     public void setSiGunGuName(String siGunGuName) {
         this.siGunGuName = siGunGuName;
     }
+
+    public abstract boolean isStreetAddress();
 }

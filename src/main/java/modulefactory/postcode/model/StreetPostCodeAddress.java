@@ -62,4 +62,9 @@ public class StreetPostCodeAddress extends PostCodeAddress {
     public void setBuildingName(String buildingName) {
         this.buildingName = buildingName;
     }
+
+    @Override
+    public boolean isStreetAddress() {
+        return true;
+    }
 }

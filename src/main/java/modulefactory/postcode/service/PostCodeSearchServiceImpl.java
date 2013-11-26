@@ -9,6 +9,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: chanwook
@@ -40,7 +42,8 @@ public class PostCodeSearchServiceImpl implements  PostCodeSearchService{
         //Paging 정보 구성하기
         Pageable pageRequest = createPageable(pageItemSize, pageNumber);
         if("PLAIN".equals(addressType)){
-            postCodeAddressList = plainPostCodeRepository.findPostCode(address, pageRequest);
+//            postCodeAddressList = plainPostCodeRepository.findByAddress(address, pageRequest);
+            postCodeAddressList = plainPostCodeRepository.findByAddress(address, pageRequest);
         }else if("STREET".equals(addressType)){
             postCodeAddressList = streetPostCodeRepository.findPostCode(address, pageRequest);
         }

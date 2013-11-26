@@ -48,4 +48,9 @@ public class PlainPostCodeAddress extends PostCodeAddress {
     public void setDetailAddress(String detailAddress) {
         this.detailAddress = detailAddress;
     }
+
+    @Override
+    public boolean isStreetAddress() {
+        return false;
+    }
 }

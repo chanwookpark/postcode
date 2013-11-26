@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface PlainPostCodeRepository extends JpaRepository<PlainPostCodeAddress, Long>{
 
     @Query(value = "SELECT p " +
@@ -18,7 +20,7 @@ public interface PlainPostCodeRepository extends JpaRepository<PlainPostCodeAddr
                    " p.eupMyeonDongRiName LIKE %:address% OR " +
                    " p.detailAddress LIKE %:address% "
     )
-//    List<PostCodeAddress> findPostCode(@Param("address") String address, Pageable pageable);
-    Page<PostCodeAddress> findPostCode(@Param("address") String address, Pageable pageable);
+//    List<PostCodeAddress> findByAddress(@Param("address") String address);
+    Page<PostCodeAddress> findByAddress(@Param("address") String address, Pageable pageable);
 
 }

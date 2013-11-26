@@ -17,6 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -38,6 +39,7 @@ public class PostCodeSearchControllerTest {
     protected WebApplicationContext wac;
 
     PostCodeSearchService service;
+    private ResultActions resultActions;
 
     @Before
     public void setup() {
@@ -58,14 +60,16 @@ public class PostCodeSearchControllerTest {
         }});
         when(service.search("문래", "PLAIN", 0, 10)).thenReturn(page);
 
-        mockMvc.perform(get("/postCode/web?address=문래&addressType=PLAIN").accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+        resultActions = mockMvc.perform(get("/postCode/search?address=문래&addressType=PLAIN").accept(MediaType.parseMediaType("application/json;charset=UTF-8")));
+        resultActions
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(jsonPath("$[0].postCode").value("150701"))
-                .andExpect(jsonPath("$[0].cityDoName").value("서울특별시"))
-                .andExpect(jsonPath("$[0].siGunGuName").value("영등포구"))
-                .andExpect(jsonPath("$[0].eupMyeonDongRiName").value("문래동1가"))
-                .andExpect(jsonPath("$[0].detailAddress").value("우리벤처타운"))
+                .andExpect(jsonPath("$contents[0].address").value("서울특별시 영등포구 문래동1가 우리벤처타운 "))
+                .andExpect(jsonPath("$contents[0].postCode").value("150701"))
+                .andExpect(jsonPath("$contents[1].address").value("서울특별시 영등포구 문래동2가 우리벤처타운 "))
+                .andExpect(jsonPath("$contents[1].postCode").value("150702"))
+                .andExpect(jsonPath("$contents[2].address").value("서울특별시 영등포구 문래동3가 우리벤처타운 "))
+                .andExpect(jsonPath("$contents[2].postCode").value("150703"))
         ;
     }
 }

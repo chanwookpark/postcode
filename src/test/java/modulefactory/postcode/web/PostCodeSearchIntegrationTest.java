@@ -52,25 +52,26 @@ public class PostCodeSearchIntegrationTest {
 
     @Test
     public void searchByAddress() throws Exception {
-        plainPostCodeRepositoryrepository.save(getPlainAdressData(1));
+        plainPostCodeRepositoryrepository.save(getPlainAdressData(3));
 
         //like search
         mockMvc.perform(get("/postCode/search")
-                .param("address", "문래동").param("addressType", "PLAIN")
+                .param("address", "문래").param("addressType", "PLAIN")
                 .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(jsonPath("$[0].postCode").value("150700"))
-                .andExpect(jsonPath("$[0].cityDoName").value("서울특별시"))
-                .andExpect(jsonPath("$[0].siGunGuName").value("영등포구"))
-                .andExpect(jsonPath("$[0].eupMyeonDongRiName").value("문래동0가"))
-                .andExpect(jsonPath("$[0].detailAddress").value("우리벤처타운"))
+                .andExpect(jsonPath("$contents[0].postCode").value("150700"))
+                .andExpect(jsonPath("$contents[0].address").value("서울특별시 영등포구 문래동0가 우리벤처타운 "))
+                .andExpect(jsonPath("$contents[1].postCode").value("150701"))
+                .andExpect(jsonPath("$contents[1].address").value("서울특별시 영등포구 문래동1가 우리벤처타운 "))
+                .andExpect(jsonPath("$contents[2].postCode").value("150702"))
+                .andExpect(jsonPath("$contents[2].address").value("서울특별시 영등포구 문래동2가 우리벤처타운 "))
         ;
     }
 
     @Test
     public void searchByStreetAddress() throws Exception {
-        streetPostCodeRepository.save(getStreetAdressData(1));
+        streetPostCodeRepository.save(getStreetAdressData(2));
 
         //like search
         mockMvc.perform(get("/postCode/search")
@@ -78,12 +79,10 @@ public class PostCodeSearchIntegrationTest {
                 .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(jsonPath("$[0].postCode").value("135100"))
-                .andExpect(jsonPath("$[0].cityDoName").value("서울특별시"))
-                .andExpect(jsonPath("$[0].siGunGuName").value("강남구"))
-                .andExpect(jsonPath("$[0].streetName").value("강남대로"))
-                .andExpect(jsonPath("$[0].streetDetailName").value("150길"))
-                .andExpect(jsonPath("$[0].buildingName").value("좋은빌딩"))
+                .andExpect(jsonPath("$contents[0].postCode").value("135100"))
+                .andExpect(jsonPath("$contents[0].address").value("서울특별시 강남구 강남대로 150길 좋은빌딩 "))
+                .andExpect(jsonPath("$contents[1].postCode").value("135101"))
+                .andExpect(jsonPath("$contents[1].address").value("서울특별시 강남구 강남대로 151길 좋은빌딩 "))
         ;
     }
 
@@ -101,9 +100,9 @@ public class PostCodeSearchIntegrationTest {
         );
         resultActions
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].postCode").value("135100"))
-                .andExpect(jsonPath("$[1].postCode").value("135101"))
-                .andExpect(jsonPath("$[2].postCode").value("135102"))
+                .andExpect(jsonPath("$contents[0].postCode").value("135100"))
+                .andExpect(jsonPath("$contents[1].postCode").value("135101"))
+                .andExpect(jsonPath("$contents[2].postCode").value("135102"))
         ;
 
         mockMvc.perform(
@@ -114,9 +113,9 @@ public class PostCodeSearchIntegrationTest {
                         .param("_pageNumber", "1")
                 )
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].postCode").value("135103"))
-                .andExpect(jsonPath("$[1].postCode").value("135104"))
-                .andExpect(jsonPath("$[2].postCode").value("135105"))
+                .andExpect(jsonPath("$contents[0].postCode").value("135103"))
+                .andExpect(jsonPath("$contents[1].postCode").value("135104"))
+                .andExpect(jsonPath("$contents[2].postCode").value("135105"))
         ;
 
         mockMvc.perform(
@@ -127,9 +126,9 @@ public class PostCodeSearchIntegrationTest {
                         .param("_pageNumber", "2")
         )
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].postCode").value("135106"))
-                .andExpect(jsonPath("$[1].postCode").value("135107"))
-                .andExpect(jsonPath("$[2].postCode").value("135108"))
+                .andExpect(jsonPath("$contents[0].postCode").value("135106"))
+                .andExpect(jsonPath("$contents[1].postCode").value("135107"))
+                .andExpect(jsonPath("$contents[2].postCode").value("135108"))
         ;
 
         mockMvc.perform(
@@ -140,7 +139,7 @@ public class PostCodeSearchIntegrationTest {
                         .param("_pageNumber", "3")
         )
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].postCode").value("135109"))
+                .andExpect(jsonPath("$contents[0].postCode").value("135109"))
         ;
     }
 
