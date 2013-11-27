@@ -1,156 +1,100 @@
 <!doctype html>
 <meta charset="UTF-8">
 <title>우편번호 찾기</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width">
+<meta name="pattern" content="postcode-search">
 <link rel="stylesheet" href="./postcode.css">
-<script src="http://image.gsshop.com/deal/static/html/mc/script/lib/json2.js"></script>
-<script src="./res/xhr.js"></script>
-<h1>dev:우편번호 찾기</h1>
+<h1>dev-1</h1>
 
 <section class="postcodeSearch">
 	<h1>우편번호 목록</h1>
-	<h2>조회</h2>
-	<form id="postcodeSearchForm" class="form" action="http://soopul.com" method="GET">
-		<p>
-			<label class="row">
-				<span class="rowh">도로명주소</span>
-				<select name="addrSelect1" id="addrSelect1">
-					<option value="v0">도로명주소</option>
-					<option value="v1">1</option>
-					<option value="v2">2</option>
-				</select>
+	<form 
+		id="postcodeSearchForm" 
+		name="postcodeSearchForm" 
+		class="form" 
+		action="http://soopul.com" 
+		method="GET">
+		<fieldset>
+			<legend>검색 카테고리 선택</legend>
+			<label for="r1A">
+				<input type="radio" name="r1" id="r1A" value="A" checked="checked">
+				<span class="rowh">주소</span> 
 			</label>
-			<label class="row">
+			<br>
+			<label for="r1R"> 
+				<input type="radio" name="r1" id="r1R" value="R">
 				<span class="rowh">도로명</span>
-				<select name="addrSelect2" id="addrSelect2">
-					<option value="v0">도로명</option>
-					<option value="v1">1</option>
-					<option value="v2">2</option>
-				</select>
 			</label>
-			<label class="row">
-				<span class="rowh">도로명입력</span>
-				<input type="text" name="addrText" id="addrText" value="" placeholder="도로명 입력">
+		</fieldset>
+		<p class="inputTextBox">
+			<label for="t1">
+				<span class="rowh">검색어 입력</span>
+				<input type="text" name="t1" id="t1" placeholder="도로명 입력">
+				<input type="submit" id="submit" value="조회">
 			</label>
 		</p>
 		<p class="controls">
-			<input type="submit" id="submit" value="조회">
+			<!--
 			<a href="#" target="_blank">등록</a>
 			<a href="#" target="_blank">엑셀등록</a>
+			-->
 		</p>
 	</form>
 
 
-	<h2>검색결과</h2>
-	<table id="postcodeResultTable" class="results">
-		<caption>
-			<p>테이블 1. 
-			<p>도로명주소, 도로명, 키워드로 검색한 정보중 순번, 우편번호, 주소만을 걸러내어 보여준다
-		</caption>
-		<colgroup>
-			<col class="order">
-			<col class="postcode">
-			<col class="address">
-		<thead>
-			<tr>
-				<th>순번</th>
-				<th>우편번호</th>
-				<th>주소</th>
-		</thead>
-		<tbody>
-			<!-- {#.} -->
-			<tr>
-				<td>{order}</td>
-				<td>{postcode}</td>
-				<td><a>{address}</a></td>
-			<!-- {/.} -->
-		</tbody>
-	</table>
+	
+	<section id="results" class="results type{addressType}">
+		<!-- #dustm --><div id="dustm">
+		<h1>검색결과</h1>
+		<table id="postcodeResultTable">
+			<caption>
+				<p>테이블 1. 도로명주소, 도로명, 키워드로 검색한 정보중 순번, 우편번호, 주소만을 걸러내어 보여준다
+			</caption>
+			<colgroup>
+				<col class="id">
+				<col class="postcode">
+				<col class="address">
+			<thead>
+				<tr>
+					<th>순번</th>
+					<th>우편번호</th>
+					<th>주소</th>
+			</thead>
+			<tbody>
+				<!-- {#contents} -->
+				<tr>
+					<th>{id}</th>
+					<td>{postCode}</td>
+					<td><a>{address}</a></td>
+				<!-- {/contents} -->
+			</tbody>
+		</table>
+		</div><!-- /dustm -->
 
-	<nav class="paging-nav _conditional">
-		<h1>우편번호 검색 결과 페이지 이동</h1>
-		<ul>
-			<li><a>처음</a></li>
-			<li><a>이전</a></li>
-			<li><a>1</a></li>
-			<li><a>2</a></li>
-			<li><a>3</a></li>
-			<li><a>4</a></li>
-			<li><a>다음</a></li>
-			<li><a>마지막</a></li>
-		</ul>
-	</nav>
+		<nav class="paging-nav _conditional">
+			<h1>우편번호 검색 결과 페이지 이동</h1>
+			<p>
+				<a>처음</a>
+				<a>이전</a>
+				<a>1</a>
+				<a>2</a>
+				<a>3</a>
+				<a>4</a>
+				<a>5</a>
+				<a>다음</a>
+				<a>마지막</a>
+			</p>
+		</nav>
+	</section><!-- #results -->
+	
 
-	<script>
-		(function(doc, formID){
-			var form = form = doc.getElementById(formID);
-
-			form.select1 = doc.getElementById('addrSelect1');
-			form.select1.onchange = function() {
-				form.select2.setValue(this.value);
-				form.dataList[this.id] = this.value;
-			};
-
-
-
-			form.select2 = doc.getElementById('addrSelect2');
-			form.select2.setValue = function(v) {
-				this.value = v; 
-				form.dataList[this.id] = v;
-			};
-			form.select2.onchange = function() {
-				form.dataList[this.id] = this.value;
-			};
-
-
-			form.text1 = doc.getElementById('addrText');
-			form.text1.onfocus = function() {
-
-			};
-			form.text1.onblur = function() {
-				form.dataList[this.id] = this.value;
-			};
-
-
-			form.dataList = {
-				"addrSelect1": null, 
-				"addrSelect2": null, 
-				"addrText": null
-			};
-			form.submit = doc.getElementById('submit');
-
-			/* 
-				- 조회 클릭
-				- 조회 버튼 비활성화
-				- GET/url로 전송
-				- 반환된값 자체를 alert으로 사용자에게 공지
-				- 조회 버튼 활성화
-			*/ 
-			form.onsubmit = function() {
-				this.submit.disabled = true; 
-
-				// for(x in this.dataList) {
-				// 	if(this.dataList[x] == null) {
-				// 		alert('입력하지 않은 부분이 있습니다');
-				// 		form.submit.disabled = false;
-				// 		return false; 
-				// 	}
-				// }
-
-				xhr({
-					type: "GET", 
-					url: "./postcode-search.json", 
-					success: function(data) {
-						form.submit.disabled = false;
-					}, 
-					error: function(err) {
-						form.submit.disabled = false;
-					}
-				});
-
-
-				return false;
-			};
-
-		})(document, 'postcodeSearchForm');
-	</script>
 </section>
+
+<script src="./res/postcode.js"></script>
+<!-- <script src="http://image.gsshop.com/deal/static/html/mc/script/lib/json2.js"></script>
+<script src="http://image.gsshop.com/deal/static/html/mc/script/lib/xhr.js"></script> -->
+<script src="http://image.gsshop.com/deal/static/html/mc/script/lib/dust-full-1.1.1.js"></script>
+<script src="http://image.gsshop.com/deal/static/html/mc/script/lib/dust-helpers-1.1.1.js"></script>
+<script src="./render.json"></script>
+<script src="http://image.gsshop.com/deal/static/html/mc/script/lib/dustr.js"></script>

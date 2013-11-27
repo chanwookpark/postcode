@@ -19,7 +19,8 @@ th, td {
   /* 컨텐츠 양에 따라 노출될수도 그렇지 않을수도 있다 */
   position: relative;
   padding: 0 1em;
-  border: 1px dotted red; }
+  border: 1px dotted red;
+  background-color: #FBF8EF; }
   ._conditional::before {
     content: "conditional";
     position: absolute;
@@ -32,13 +33,16 @@ th, td {
   padding: .5em 1em;
   border-top: 1px dashed #ccc;
   border-bottom: 1px dashed #ccc; }
-  .postcodeSearch .form .row {
+  .postcodeSearch .inputTextBox .rowh {
     display: block; }
-  .postcodeSearch .form .rowh {
-    display: inline-block;
-    width: 80px; }
   .postcodeSearch .results caption {
-    text-align: left; }
+    display: none;
+    text-align: left;
+    caption-side: bottom; }
+  .postcodeSearch .results colgroup .id {
+    width: 50px; }
+  .postcodeSearch .results colgroup .postcode {
+    width: 80px; }
   .postcodeSearch .paging-nav ul {
     padding-left: 0; }
   .postcodeSearch .paging-nav li {
