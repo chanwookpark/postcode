@@ -8,7 +8,6 @@
 <h1>dev-1</h1>
 
 <section class="postcodeSearch">
-	
 	<h1>우편번호 목록</h1>
 	<form id="postcodeSearchForm" name="postcodeSearchForm" class="form" action="http://soopul.com" method="GET">
 		<fieldset>
@@ -42,8 +41,6 @@
 	
 	<div id="dustm">
 	<section id="resutls" class="results type_{addressType}">
-		
-
 		<h1>검색결과</h1>
 		<table id="postcodeResultTable">
 			<caption>
@@ -55,7 +52,7 @@
 				<col class="address">
 			<thead>
 				<tr>
-					<td class="id">순번</td>
+					<th>순번</th>
 					<th>우편번호</th>
 					<th>주소</th>
 			</thead>
@@ -69,10 +66,22 @@
 			</tbody>
 		</table>
 
-		<nav id="postcodeResultTable_Paging" class="paging-nav _conditional">
+		<!-- 
+		<nav class="paging-nav _conditional">
 			<h1>우편번호 검색 결과 페이지 이동</h1>
+			<p>
+				<a>처음</a>
+				<a>이전</a>
+				<a>1</a>
+				<a>2</a>
+				<a>3</a>
+				<a>4</a>
+				<a>5</a>
+				<a>다음</a>
+				<a>마지막</a>
+			</p>
 		</nav>
-
+		-->
 	</section><!-- #results -->
 	</div><!-- /dustm -->
 	

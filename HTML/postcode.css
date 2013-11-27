@@ -43,9 +43,6 @@ th, td {
     width: 50px; }
   .postcodeSearch .results colgroup .postcode {
     width: 80px; }
-  .postcodeSearch .results tbody .id {
-    font-weight: bold;
-    background-color: #eeeeee; }
   .postcodeSearch .paging-nav ul {
     padding-left: 0; }
   .postcodeSearch .paging-nav li {
