@@ -9,12 +9,7 @@
 
 <section class="postcodeSearch">
 	<h1>우편번호 목록</h1>
-	<form 
-		id="postcodeSearchForm" 
-		name="postcodeSearchForm" 
-		class="form" 
-		action="http://soopul.com" 
-		method="GET">
+	<form id="postcodeSearchForm" name="postcodeSearchForm" class="form" action="http://soopul.com" method="GET">
 		<fieldset>
 			<legend>검색 카테고리 선택</legend>
 			<label for="r1A">
@@ -41,11 +36,11 @@
 			-->
 		</p>
 	</form>
-
+	
 
 	
-	<section id="results" class="results type{addressType}">
-		<!-- #dustm --><div id="dustm">
+	<div id="dustm">
+	<section id="resutls" class="results type_{addressType}">
 		<h1>검색결과</h1>
 		<table id="postcodeResultTable">
 			<caption>
@@ -70,8 +65,8 @@
 				<!-- {/contents} -->
 			</tbody>
 		</table>
-		</div><!-- /dustm -->
 
+		<!-- 
 		<nav class="paging-nav _conditional">
 			<h1>우편번호 검색 결과 페이지 이동</h1>
 			<p>
@@ -86,7 +81,9 @@
 				<a>마지막</a>
 			</p>
 		</nav>
+		-->
 	</section><!-- #results -->
+	</div><!-- /dustm -->
 	
 
 </section>

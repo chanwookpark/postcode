@@ -1,0 +1,43 @@
+<script src="http://image.gsshop.com/deal/static/html/mc/script/lib/dust-full-1.1.1.js"></script>
+	<script src="http://image.gsshop.com/deal/static/html/mc/script/lib/dust-helpers-1.1.1.js"></script>
+
+	
+	<script>
+		(function(doc){
+			var dusterr = "";
+			var dustout = "";
+			var renderID = "postcode-search";
+			var html = "";
+			var renderJson = [
+				{
+					"order": "31", 
+					"postcode": "135-769", 
+					"address": "서울특별시 강남구 강남대로 358 - 0 KTB NETWORK"
+				}, 
+				{
+					"order": "32", 
+					"postcode": "135-792", 
+					"address": "서울특별시 강남구 강남대로 354 - 0 혜전빌딩"
+				}
+			]; 
+
+			var dustmTarget = doc.getElementById("dustm");
+			var dustm = 
+				dustmTarget.innerHTML
+					.replace(/&lt;/g, '<')
+					.replace(/&gt;/g, '>')
+					.replace(/\n/g, '')
+					.replace(/\t/g, '');
+			var dustc = dust.compile(dustm, renderID);
+
+			dust.loadSource(dustc);
+			dust.render(renderID, renderJson, function(err, out) {
+				dusterr = err;
+				dustout = out;
+
+				dustmTarget.innerHTML = out;
+				dustmTarget.style.display = "block";
+				html = out;
+			});
+		})(document);
+	</script>

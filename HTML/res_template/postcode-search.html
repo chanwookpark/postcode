@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>우편번호 찾기</title>
+	<link rel="stylesheet" href="./postcode.css">
+	<script src="http://image.gsshop.com/deal/static/html/mc/script/lib/json2.js"></script>
+	<script src="./res/xhr.js"></script>
+</head>
+<body>
+	
+	<form id="postcodeSearchForm" class="postcodeSearchForm" action="" method="">
+		<fieldset>
+			<legend>우편번호 등록</legend>
+
+			<span class="row">
+				<label for="addrSelect1" class="rowh">도로명주소</label>
+				<select name="addrSelect1" id="addrSelect1">
+					<option value="v0">도로명주소</option>
+					<option value="v1">1</option>
+					<option value="v2">2</option>
+				</select>
+			</span>
+
+			<span class="row">
+				<label for="addrSelect2" class="rowh">도로명</label>
+				<select name="addrSelect2" id="addrSelect2">
+					<option value="v0">도로명</option>
+					<option value="v1">1</option>
+					<option value="v2">2</option>
+				</select>
+			</span>
+
+			<span class="row">
+				<label for="addrText" class="rowh">도로명입력</label>
+				<input type="text" name="addrText" id="addrText" value="" placeholder="도로명 입력">
+			</span>
+		</fieldset>
+		<p class="controls" id="postcodeSearch_controls">
+			<input type="submit" id="submit" value="조회">
+			<a href="#" target="_blank">등록</a>
+			<a href="#" target="_blank">엑셀등록</a>
+		</p>
+	</form>
+
+
+	<table id="dustm" class="postcodeResults" summary="테이블에 표현할 정보를 상세히 기술 - 도로명주소, 도로명, 키워드 입력을 통해 조회한 주소를 순번, 우편번호, 주소로 보여주는 테이블">
+		<caption>표1. 우편번호 검색 결과</caption>
+		<colgroup>
+		<col class="order">
+		<col class="postcode">
+		<col class="address">
+		<thead>
+			<tr>
+				<th>순번</th>
+				<th>우편번호</th>
+				<th>주소</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- {#.} -->
+			<tr>
+				<td>{order}</td>
+				<td>{postcode}</td>
+				<td><a>{address}</a></td>
+			</tr>
+			<!-- {/.} -->
+		</tbody>
+	</table>
+	<!-- 
+		{
+			num: '', 
+			postcode: '', 
+			address: ''
+		}
+	-->
+
+	<script>
+		/* postcodeSearch */
+		(function(doc, formID){
+			var form = form = doc.getElementById(formID);
+
+			form.select1 = doc.getElementById('addrSelect1');
+			form.select1.onchange = function() {
+				form.select2.setValue(this.value);
+				form.dataList[this.id] = this.value;
+			};
+
+
+
+			form.select2 = doc.getElementById('addrSelect2');
+			form.select2.setValue = function(v) {
+				this.value = v; 
+				form.dataList[this.id] = v;
+			};
+			form.select2.onchange = function() {
+				form.dataList[this.id] = this.value;
+			};
+
+
+			form.text1 = doc.getElementById('addrText');
+			form.text1.onfocus = function() {
+
+			};
+			form.text1.onblur = function() {
+				form.dataList[this.id] = this.value;
+			};
+
+
+			form.dataList = {
+				"addrSelect1": null, 
+				"addrSelect2": null, 
+				"addrText": null
+			};
+			form.submit = doc.getElementById('submit');
+
+			/* 
+				- 조회 클릭
+				- 조회 버튼 비활성화
+				- GET/url로 전송
+				- 반환된값 자체를 alert으로 사용자에게 공지
+				- 조회 버튼 활성화
+			*/ 
+			form.onsubmit = function() {
+				this.submit.disabled = true; 
+
+				for(x in this.dataList) {
+					if(this.dataList[x] == null) {
+						alert('입력하지 않은 부분이 있습니다');
+						form.submit.disabled = false;
+						return false; 
+					}
+				}
+
+				xhr({
+					type: "GET", 
+					url: "./postcode-search.json", 
+					success: function(data) {
+						form.submit.disabled = false;
+					}, 
+					error: function(err) {
+						form.submit.disabled = false;
+					}
+				});
+
+
+				return false;
+			};
+
+		})(document, 'postcodeSearchForm');
+	</script>
+
+</body>
+</html>

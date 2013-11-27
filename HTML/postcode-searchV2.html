@@ -1,0 +1,157 @@
+<!doctype html>
+<meta charset="UTF-8">
+<title>우편번호 찾기</title>
+<link rel="stylesheet" href="./postcode.css">
+<!-- <script src="http://image.gsshop.com/deal/static/html/mc/script/lib/json2.js"></script> -->
+<script src="./res/xhr.js"></script>
+<h1>dev:우편번호 찾기</h1>
+
+<section class="postcodeSearch">
+	<h1>우편번호 목록</h1>
+	<h2>조회</h2>
+	<form id="postcodeSearchForm" name="postcodeSearchForm" class="form" action="http://soopul.com" method="GET">
+		<p>
+			<label class="row">
+				<span class="rowh">도로명주소</span>
+				<select name="addrSelect1" id="addrSelect1">
+					<option value="v0">도로명주소</option>
+					<option value="v1">1</option>
+					<option value="v2">2</option>
+				</select>
+			</label>
+			<label class="row">
+				<span class="rowh">도로명</span>
+				<select name="addrSelect2" id="addrSelect2">
+					<option value="v0">도로명</option>
+					<option value="v1">1</option>
+					<option value="v2">2</option>
+				</select>
+			</label>
+			<label class="row">
+				<span class="rowh">도로명입력</span>
+				<input type="text" name="addrText" id="addrText" value="" placeholder="도로명 입력">
+			</label>
+		</p>
+		<p class="controls">
+			<input type="submit" id="submit" value="조회">
+			<a href="#" target="_blank">등록</a>
+			<a href="#" target="_blank">엑셀등록</a>
+		</p>
+	</form>
+
+
+	<h2>검색결과</h2>
+	<table id="postcodeResultTable" class="results">
+		<caption>
+			<p>테이블 1. 
+			<p>도로명주소, 도로명, 키워드로 검색한 정보중 순번, 우편번호, 주소만을 걸러내어 보여준다
+		</caption>
+		<colgroup>
+			<col class="order">
+			<col class="postcode">
+			<col class="address">
+		<thead>
+			<tr>
+				<th>순번</th>
+				<th>우편번호</th>
+				<th>주소</th>
+		</thead>
+		<tbody>
+			<!-- {#.} -->
+			<tr>
+				<td>{order}</td>
+				<td>{postcode}</td>
+				<td><a>{address}</a></td>
+			<!-- {/.} -->
+		</tbody>
+	</table>
+
+	<nav class="paging-nav _conditional">
+		<h1>우편번호 검색 결과 페이지 이동</h1>
+		<ul>
+			<li><a>처음</a></li>
+			<li><a>이전</a></li>
+			<li><a>1</a></li>
+			<li><a>2</a></li>
+			<li><a>3</a></li>
+			<li><a>4</a></li>
+			<li><a>다음</a></li>
+			<li><a>마지막</a></li>
+		</ul>
+	</nav>
+
+	<script>
+		(function(doc, formID){
+			var form = form = doc.getElementById(formID)
+				, s1 = form[0]
+				, s2 = form[1]
+				, t1 = form[2];
+
+			form.dataList = {
+				"addrSelect1": null, 
+				"addrSelect2": null, 
+				"addrText": null
+			};
+
+			s1.onchange = function() {
+				s2.setValue(this.value);
+				form.dataList[this.id] = this.value;
+			};
+			s2.setValue = function(v) {
+				this.value = v; 
+				form.dataList[this.id] = v;
+			};
+			s2.onchange = function() {
+				form.dataList[this.id] = this.value;
+			};
+			t1.onfocus = function() {};
+			t1.onblur = function() {
+				form.dataList[this.id] = this.value;
+			};
+
+
+
+			/* 
+				- 조회 클릭
+				- 조회 버튼 비활성화
+				- GET/url로 전송
+				- 반환된값 자체를 alert으로 사용자에게 공지
+				- 조회 버튼 활성화
+			*/ 
+			form.onsubmit = function() {
+				this[3].disabled = true; 
+
+				inputValidator(this.dataList, this[3]);
+				xhrMapping(this); 
+				
+				return false;
+			};
+
+		})(document, 'postcodeSearchForm');
+
+		function validator(obj, btn) {
+			for(x in obj) {
+				if(obj[x] == null) {
+					alert('입력하지 않은 부분이 있습니다');
+					btn.disabled = false;
+					return false; 
+				}
+			}
+		}
+
+		function xhrMapping(form) {
+			xhr({
+				type: "GET", 
+				url: "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=donghyuc", 
+				success: function(data) {
+					alert('[data] '+data);
+					form[3].disabled = false;
+				}, 
+				error: function(err) {
+					alert('[err] '+err);
+					form[3].disabled = false;
+				}
+			});
+		}
+	</script>
+</section>
