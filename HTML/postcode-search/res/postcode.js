@@ -3,12 +3,6 @@
 var results = document.getElementById("results");
 var postcodeSearchForm = document.getElementById('postcodeSearchForm');
 postcodeSearchForm.onsubmit = function() {
-	xhr({
-		type: "GET", 
-		url: "", 
-		success: function() {
-			
-		}
-	});
+	
 	return false; 
 };
