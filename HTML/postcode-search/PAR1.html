@@ -7,14 +7,16 @@
 <link rel="stylesheet" href="./postcode.css">
 <h1>dev:우편번호 찾기</h1>
 
+
 <div id="dustm">
-	<h2>검색결과</h2>
-	<table id="postcodeResultTable" class="results">
+<section id="resutls" class="results type_{addressType}">
+	<h1>검색결과</h1>
+	<table id="postcodeResultTable">
 		<caption>
 			<p>테이블 1. 도로명주소, 도로명, 키워드로 검색한 정보중 순번, 우편번호, 주소만을 걸러내어 보여준다
 		</caption>
 		<colgroup>
-			<col class="order">
+			<col class="id">
 			<col class="postcode">
 			<col class="address">
 		<thead>
@@ -24,43 +26,20 @@
 				<th>주소</th>
 		</thead>
 		<tbody>
-			<!-- {#.} -->
+			<!-- {#contents} -->
 			<tr>
-				<th>{order}</th>
-				<td>{postcode}</td>
+				<th>{id}</th>
+				<td>{postCode}</td>
 				<td><a>{address}</a></td>
-			<!-- {/.} -->
+			<!-- {/contents} -->
 		</tbody>
 	</table>
 
 	<nav class="paging-nav _conditional">
 		<h1>우편번호 검색 결과 페이지 이동</h1>
-		<p>
-			<a>처음</a>
-			<a>이전</a>
-			<a>1</a>
-			<a>2</a>
-			<a>3</a>
-			<a>4</a>
-			<a>5</a>
-			<a>다음</a>
-			<a>마지막</a>
-		</p>
-		<!--
-		<ul>
-			<li><a>처음</a></li>
-			<li><a>이전</a></li>
-			<li><a>1</a></li>
-			<li><a>2</a></li>
-			<li><a>3</a></li>
-			<li><a>4</a></li>
-			<li><a>다음</a></li>
-			<li><a>마지막</a></li>
-		</ul>
-		-->
 	</nav>
+</section><!-- #results -->
 </div>
-</section>
 
 <!-- <script src="./postcode.js"></script> -->
 <!-- <script src="http://image.gsshop.com/deal/static/html/mc/script/lib/json2.js"></script>
