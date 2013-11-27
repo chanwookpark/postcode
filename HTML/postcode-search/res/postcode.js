@@ -1,13 +1,14 @@
 
+// 비동기로 조회된 값을 포함하는 영역
 var results = document.getElementById("results");
 var postcodeSearchForm = document.getElementById('postcodeSearchForm');
-var formElements = postcodeSearchForm.elements;
-postcodeSearchForm.model = {};
-
-for (var i = 0; i < formElements.length; i++) {
-	// console.log(i);
-	// alert(i);
-}
 postcodeSearchForm.onsubmit = function() {
+	xhr({
+		type: "GET", 
+		url: "", 
+		success: function() {
+			
+		}
+	});
 	return false; 
 };

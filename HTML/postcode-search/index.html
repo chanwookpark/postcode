@@ -3,7 +3,7 @@
 <title>우편번호 찾기</title>
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width">
-<link rel="stylesheet" href="./postcode.css">
+<link rel="stylesheet" href="http://soopul.com/mullae/postcode/postcode.css">
 <h1>dev-1</h1>
 
 <section class="postcodeSearch">
@@ -38,34 +38,9 @@
 	
 
 	
-	<section id="resutls" class="results type_{addressType}">
-		<h1>검색결과</h1>
-		<table id="postcodeResultTable">
-			<caption>
-				<p>테이블 1. 도로명주소, 도로명, 키워드로 검색한 정보중 순번, 우편번호, 주소만을 걸러내어 보여준다
-			</caption>
-			<colgroup>
-				<col class="id">
-				<col class="postcode">
-				<col class="address">
-			<thead>
-				<tr>
-					<th>순번</th>
-					<th>우편번호</th>
-					<th>주소</th>
-			</thead>
-			<tbody>
-				<!-- {#contents} -->
-				<tr>
-					<th>{id}</th>
-					<td>{postCode}</td>
-					<td><a>{address}</a></td>
-				<!-- {/contents} -->
-			</tbody>
-		</table>
-
-		<nav class="paging-nav _conditional">
-			<h1>우편번호 검색 결과 페이지 이동</h1>
-		</nav>
-	</section><!-- #results -->
+	<div id="resutls" class="results">
+		<!-- ${view} -->
+	</div><!-- #results -->
 </section>
+
+<script src="http://soopul.com/mullae/postcode/res/postcode.js"></script>
