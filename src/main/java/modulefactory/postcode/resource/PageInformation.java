@@ -1,6 +1,8 @@
 package modulefactory.postcode.resource;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,6 +21,12 @@ public class PageInformation implements Serializable {
 
     private int totalPage;
 
+    private Integer[] navigationNumber;
+
+    private boolean enablePrevious = false;
+
+    private boolean enableNext = false;
+
     public PageInformation() {
     }
 
@@ -27,6 +35,71 @@ public class PageInformation implements Serializable {
         this.pageSize = pageSize;
         this.totalCount = totalCount;
         this.totalPage = totalPage;
+    }
+
+    public void createPageNavigation(int navigationSize) {
+
+        int navigationCount = this.pageNumber % navigationSize;
+
+        List<Integer> list = new ArrayList<Integer>();
+        //FIXME 로직 개선!
+        if (navigationCount == 1) {
+            //this.navigationNumber = new Integer[]{pageNumber, pageNumber + 1, pageNumber + 2, pageNumber + 3, pageNumber + 4};
+//            list.add(pageNumber);
+//            for (int i = 1; i < navigationSize; i++) {
+//                list.add(i);
+//            }
+            addIfPossible(list, pageNumber);
+            addIfPossible(list, pageNumber + 1);
+            addIfPossible(list, pageNumber + 2);
+            addIfPossible(list, pageNumber + 3);
+            addIfPossible(list, pageNumber + 4);
+
+        } else if (navigationCount == 2) {
+            //this.navigationNumber = new Integer[]{pageNumber - 1, pageNumber, pageNumber + 1, pageNumber + 2, pageNumber + 3};
+            addIfPossible(list, pageNumber - 1);
+            addIfPossible(list, pageNumber);
+            addIfPossible(list, pageNumber + 1);
+            addIfPossible(list, pageNumber + 2);
+            addIfPossible(list, pageNumber + 3);
+        } else if (navigationCount == 3) {
+//            this.navigationNumber = new Integer[]{pageNumber - 2, pageNumber - 1, pageNumber, pageNumber + 1, pageNumber + 2};
+            addIfPossible(list, pageNumber - 2);
+            addIfPossible(list, pageNumber - 1);
+            addIfPossible(list, pageNumber);
+            addIfPossible(list, pageNumber + 1);
+            addIfPossible(list, pageNumber + 2);
+        } else if (navigationCount == 4) {
+//            this.navigationNumber = new Integer[]{pageNumber - 3, pageNumber - 2, pageNumber - 1, pageNumber, pageNumber + 1};
+            addIfPossible(list, pageNumber - 3);
+            addIfPossible(list, pageNumber - 2);
+            addIfPossible(list, pageNumber - 1);
+            addIfPossible(list, pageNumber);
+            addIfPossible(list, pageNumber + 1);
+        } else if (navigationCount == 0) {
+//            this.navigationNumber = new Integer[]{pageNumber - 4, pageNumber - 3, pageNumber - 2, pageNumber - 1, pageNumber};
+            addIfPossible(list, pageNumber - 4);
+            addIfPossible(list, pageNumber - 3);
+            addIfPossible(list, pageNumber - 2);
+            addIfPossible(list, pageNumber - 1);
+            addIfPossible(list, pageNumber);
+        }
+        this.navigationNumber = list.toArray(new Integer[list.size()]);
+
+        // 이전버튼 활성화 처리
+        if (this.navigationNumber[0] > navigationSize) {
+            this.enablePrevious = true;
+        }
+
+        if (this.navigationNumber.length == navigationSize && this.navigationNumber[4] < this.totalPage) {
+            this.enableNext = true;
+        }
+    }
+
+    private void addIfPossible(List<Integer> list, int count) {
+        if (count <= this.totalPage) {
+            list.add(count);
+        }
     }
 
     public int getPageNumber() {
@@ -59,5 +132,29 @@ public class PageInformation implements Serializable {
 
     public void setTotalPage(int totalPage) {
         this.totalPage = totalPage;
+    }
+
+    public Integer[] getNavigationNumber() {
+        return navigationNumber;
+    }
+
+    public void setNavigationNumber(Integer[] navigationNumber) {
+        this.navigationNumber = navigationNumber;
+    }
+
+    public boolean isEnablePrevious() {
+        return enablePrevious;
+    }
+
+    public void setEnablePrevious(boolean enablePrevious) {
+        this.enablePrevious = enablePrevious;
+    }
+
+    public boolean isEnableNext() {
+        return enableNext;
+    }
+
+    public void setEnableNext(boolean enableNext) {
+        this.enableNext = enableNext;
     }
 }

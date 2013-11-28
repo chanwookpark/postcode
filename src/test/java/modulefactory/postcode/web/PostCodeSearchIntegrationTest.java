@@ -55,7 +55,7 @@ public class PostCodeSearchIntegrationTest {
         plainPostCodeRepositoryrepository.save(getPlainAdressData(3));
 
         //like search
-        mockMvc.perform(get("/postCode/search")
+        mockMvc.perform(get("/search")
                 .param("address", "문래").param("addressType", "PLAIN")
                 .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
                 .andExpect(status().isOk())
@@ -74,7 +74,7 @@ public class PostCodeSearchIntegrationTest {
         streetPostCodeRepository.save(getStreetAdressData(2));
 
         //like search
-        mockMvc.perform(get("/postCode/search")
+        mockMvc.perform(get("/search")
                 .param("address", "강남대로").param("addressType", "STREET")
                 .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
                 .andExpect(status().isOk())
@@ -92,7 +92,7 @@ public class PostCodeSearchIntegrationTest {
         streetPostCodeRepository.save(getStreetAdressData(10));
 
         resultActions = mockMvc.perform(
-                get("/postCode/search")
+                get("/search")
                         .param("address", "강남대로")
                         .param("addressType", "STREET")
                         .param("_pageItemSize", "3")
@@ -106,7 +106,7 @@ public class PostCodeSearchIntegrationTest {
         ;
 
         mockMvc.perform(
-                get("/postCode/search")
+                get("/search")
                         .param("address", "강남대로")
                         .param("addressType", "STREET")
                         .param("_pageItemSize", "3")
