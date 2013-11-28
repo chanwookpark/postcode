@@ -2,10 +2,35 @@
 var doc = document; 
 var results = doc.getElementById("results");
 var postcodeSearchForm = doc.getElementById('postcodeSearchForm');
-postcodeSearchForm.onsubmit = function() {
-	runXhr(this); 
-	return false; 
+var formModel = {
+	"action": "/postcode/search",
+	"addressType": "PLAIN", 
+	"address": "수락산"
 };
+var addressTypeA = {};
+var addressTypeB = {};
+var address = {};
+if (postcodeSearchForm != null) {
+	postcodeSearchForm.onsubmit = function() {
+		formModel.action = this.action;
+		runXhr(this); 
+		return false; 
+	};
+
+	addressTypeA = doc.getElementById("addressTypeA");
+	addressTypeB = doc.getElementById("addressTypeB");
+	address = doc.getElementById("address");
+
+	addressTypeA.onclick = addressTypeEvt;
+	addressTypeB.onclick = addressTypeEvt;
+	address.onblur = function(e) {
+		formModel[this.name] = this.value;
+	};
+
+	function addressTypeEvt(e) {
+		formModel[this.name] = this.value;
+	}
+}
 
 
 var pagingNav = doc.getElementById("paging-nav");
@@ -20,26 +45,14 @@ if (pagingNav != null) {
 }
 
 
-var formModel = {
-	"addressType": "PLAIN"
-};
-var addressTypeA = doc.getElementById("addressTypeA");
-var addressTypeB = doc.getElementById("addressTypeB");
-var address = doc.getElementById("address");
 
-addressTypeA.onclick = addressTypeEvt;
-addressTypeB.onclick = addressTypeEvt;
-
-function addressTypeEvt(e) {
-	formModel[this.name] = this.value;
-}
 
 
 function runXhr(node) {
 	var URLtemplate = "{action}?addressType={addressType}&address={address}&_pageItemSize=5&_pageNumber={pageNumber}"
-		.replace("{action}", postcodeSearchForm.action)
+		.replace("{action}", formModel.action)
 		.replace("{addressType}", formModel.addressType)
-		.replace("{address}", address.value);
+		.replace("{address}", formModel.address);
 
 	if (node.nodeName == "A") {
 		URLtemplate = URLtemplate.replace("{pageNumber}", node.title);
