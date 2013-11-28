@@ -3,20 +3,22 @@ var doc = document;
 var results = doc.getElementById("results");
 var postcodeSearchForm = doc.getElementById('postcodeSearchForm');
 postcodeSearchForm.onsubmit = function() {
-	runXhr(); 
+	runXhr(this); 
 	return false; 
 };
 
-/*
+
 var pagingNav = doc.getElementById("paging-nav");
-var pagingNavLink = pagingNav.getElementsByTagName("A");
-for(var i = 0; i < pagingNavLink.length; i++) {
-	pagingNavLink[i].onclick = function() {
-		runXhr();
-		return false; 
-	};
+if (pagingNav != null) {
+	var pagingNavLink = pagingNav.getElementsByTagName("A");
+	for(var i = 0; i < pagingNavLink.length; i++) {
+		pagingNavLink[i].onclick = function() {
+			runXhr(this);
+			return false; 
+		};
+	}
 }
-*/
+
 
 var formModel = {
 	"addressType": "PLAIN"
@@ -33,11 +35,17 @@ function addressTypeEvt(e) {
 }
 
 
-function runXhr() {
-	var URLtemplate = "{action}?addressType={addressType}&address={address}"
+function runXhr(node) {
+	var URLtemplate = "{action}?addressType={addressType}&address={address}&_pageItemSize=5&_pageNumber={pageNumber}"
 		.replace("{action}", postcodeSearchForm.action)
 		.replace("{addressType}", formModel.addressType)
 		.replace("{address}", address.value);
+
+	if (node.nodeName == "A") {
+		URLtemplate = URLtemplate.replace("{pageNumber}", node.title);
+	} else {
+		URLtemplate = URLtemplate.replace("{pageNumber}", "1");
+	}
 
 	xhr({
 		type: "GET", 
