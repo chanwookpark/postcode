@@ -5,7 +5,7 @@ var postcodeSearchForm = doc.getElementById('postcodeSearchForm');
 var formModel = {
 	"action": "/postcode/search",
 	"addressType": "PLAIN", 
-	"address": "수락산"
+	"address": "영등"
 };
 var addressTypeA = {};
 var addressTypeB = {};
@@ -33,8 +33,10 @@ if (postcodeSearchForm != null) {
 }
 
 
-var pagingNav = doc.getElementById("paging-nav");
-if (pagingNav != null) {
+
+
+function navEvt() {
+	var pagingNav = doc.getElementById("paging-nav");
 	var pagingNavLink = pagingNav.getElementsByTagName("A");
 	for(var i = 0; i < pagingNavLink.length; i++) {
 		pagingNavLink[i].onclick = function() {
@@ -65,7 +67,7 @@ function runXhr(node) {
 		url: URLtemplate, 
 		success: function(data) {
 			results.innerHTML = data;
-			console.log(data);
+			navEvt();
 		}
 	});
 }

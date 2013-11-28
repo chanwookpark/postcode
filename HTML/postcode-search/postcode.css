@@ -9,9 +9,6 @@ input, select {
   padding: 0;
   font-size: 1em; }
 
-table {
-  width: 100%; }
-
 thead {
   background-color: #eee; }
 
@@ -42,20 +39,22 @@ th, td {
     display: none;
     text-align: left;
     caption-side: bottom; }
-  .postcodeSearch .results colgroup .id {
-    width: 50px; }
-  .postcodeSearch .results colgroup .postcode {
-    width: 80px; }
+  .postcodeSearch .results thead .postCode {
+    width: 60px; }
 
-.paging-nav a {
-  display: inline-block;
-  padding: .4em .8em;
-  border: 1px solid #ddd;
-  cursor: pointer; }
-  .paging-nav a:hover {
+.paging-nav {
+  padding-top: 1em; }
+  .paging-nav h1 {
+    display: none; }
+  .paging-nav a {
+    display: inline-block;
+    padding: .4em .8em;
+    border: 1px solid #ddd;
+    cursor: pointer; }
+    .paging-nav a:hover {
+      border-color: #333; }
+  .paging-nav .on {
+    font-weight: bold;
+    color: green;
+    background-color: #eee;
     border-color: #333; }
-.paging-nav .on {
-  font-weight: bold;
-  color: green;
-  background-color: #eee;
-  border-color: #333; }

@@ -12,7 +12,7 @@ input, select {
 	font-size: 1em; 
 }
 
-table { width: 100%; }
+
 thead { background-color: #eee; }
 th, td { padding: .5em 1em; }
 
@@ -53,14 +53,17 @@ th, td { padding: .5em 1em; }
 		text-align: left; 
 		caption-side: bottom;
 	}
-	.results colgroup {
-		.id { width: 50px; }
-		.postcode { width: 80px; }
+	.results thead {
+		.id {}
+		.postCode { width: 60px; }
 		.address {}
 	}
 }
 
 .paging-nav {
+	padding-top: 1em; 
+
+	h1 { display: none; }
 	a {
 		display: inline-block;
 		padding: .4em .8em; 
