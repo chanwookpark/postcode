@@ -1,9 +1,15 @@
 var renderJson = {
+  // "page": {
+  //   "pageNumber": 0,
+  //   "pageSize": 10,
+  //   "totalCount": 30,
+  //   "totalPage": 3
+  // },
   "page": {
-    "pageNumber": 0,
-    "pageSize": 10,
-    "totalCount": 30,
-    "totalPage": 3
+    "pageNumber": 6,
+    "navigationNumber": [6,7,8,9],
+    "enableNext": false, 
+    "enablePrevious": true
   },
   "addressType": "PLAIN",
   "contents": [

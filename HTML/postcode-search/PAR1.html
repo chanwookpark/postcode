@@ -35,13 +35,34 @@
 			</tbody>
 		</table>
 
-		<nav class="paging-nav _conditional">
+		<nav class="paging-nav" id="paging-nav">
 			<h1>우편번호 검색 결과 페이지 이동</h1>
+			{#page}
+			<div>
+				{?enablePrevious}
+					{@math key="{navigationNumber[0]}" method="subtract" operand="1"}
+						<a title="{selectKey}">이전</a> 
+					{/math}
+				{/enablePrevious}
+				{#navigationNumber}
+					{@eq key="{.}" value="{pageNumber}"}
+						<a class="on" title="{.}">{.}</a> 
+					{:else}
+						<a title="{.}">{.}</a> 
+					{/eq}
+				{/navigationNumber}
+				{?enableNext}
+					{@math key="{navigationNumber.length}" method="add" operand="1"}
+						<a title="{selectKey}">다음</a>
+					{/math}
+				{/enableNext}
+			</div>
+			{/page}
 		</nav>
 	</section>
 </div>
 
-<!-- <script src="./postcode.js"></script> -->
+<script src="./postcode.js"></script>
 <!-- <script src="http://image.gsshop.com/deal/static/html/mc/script/lib/json2.js"></script>
 <script src="http://image.gsshop.com/deal/static/html/mc/script/lib/xhr.js"></script> -->
 <script src="http://image.gsshop.com/deal/static/html/mc/script/lib/dust-full-1.1.1.js"></script>

@@ -43,7 +43,16 @@ th, td {
     width: 50px; }
   .postcodeSearch .results colgroup .postcode {
     width: 80px; }
-  .postcodeSearch .paging-nav ul {
-    padding-left: 0; }
-  .postcodeSearch .paging-nav li {
-    display: inline; }
+
+.paging-nav a {
+  display: inline-block;
+  padding: .4em .8em;
+  border: 1px solid #ddd;
+  cursor: pointer; }
+  .paging-nav a:hover {
+    border-color: #333; }
+.paging-nav .on {
+  font-weight: bold;
+  color: green;
+  background-color: #eee;
+  border-color: #333; }

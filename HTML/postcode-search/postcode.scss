@@ -47,9 +47,6 @@ th, td { padding: .5em 1em; }
 		}
 	}
 
-
-
-	.results {}
 	.results caption { 
 		display: none; 
 		text-align: left; 
@@ -60,15 +57,20 @@ th, td { padding: .5em 1em; }
 		.postcode { width: 80px; }
 		.address {}
 	}
+}
 
-	// .results tbody th {
-	// 	border-bottom: 2px dotted #ddd; 
-	// 	text-align: left; 
-	// 	background-color: #eee;
-	// 	&:before { content: "ORDER: "; }
-	// }
-
-	.paging-nav {}
-	.paging-nav ul { padding-left: 0; }
-	.paging-nav li { display: inline; }
+.paging-nav {
+	a {
+		display: inline-block;
+		padding: .4em .8em; 
+		border: 1px solid #ddd; 
+		cursor: pointer; 
+		&:hover { border-color: #333; }
+	}
+	.on {
+		font-weight: bold; 
+		color: green; 
+		background-color: #eee;
+		border-color: #333;
+	}
 }
