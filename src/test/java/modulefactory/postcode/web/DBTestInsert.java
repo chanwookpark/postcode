@@ -42,13 +42,13 @@ public class DBTestInsert {
     @Test
     public void insertPlainAddressData() throws Exception {
         plainPostCodeRepositoryrepository.deleteAll();
-        plainPostCodeRepositoryrepository.save(getPlainAdressData(12));
+        plainPostCodeRepositoryrepository.save(getPlainAdressData(55));
     }
 
     @Test
     public void insertStreetAddressData() throws Exception {
         streetPostCodeRepository.deleteAll();
-        streetPostCodeRepository.save(getStreetAdressData(12));
+        streetPostCodeRepository.save(getStreetAdressData(55));
     }
 
     private List<PlainPostCodeAddress> getPlainAdressData(int size) {

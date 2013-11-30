@@ -26,6 +26,7 @@ public class PageInformation implements Serializable {
     private boolean enablePrevious = false;
 
     private boolean enableNext = false;
+    private int numberGroupCount;
 
     public PageInformation() {
     }
@@ -42,8 +43,8 @@ public class PageInformation implements Serializable {
         int navigationCount = this.pageNumber % navigationSize;
 
         List<Integer> list = new ArrayList<Integer>();
-        //FIXME 로직 개선!
-        if (navigationCount == 1) {
+        //FIXME 로직 개선! 엉망이네!
+        if (this.pageNumber == 0 || navigationCount == 1) {
             //this.navigationNumber = new Integer[]{pageNumber, pageNumber + 1, pageNumber + 2, pageNumber + 3, pageNumber + 4};
 //            list.add(pageNumber);
 //            for (int i = 1; i < navigationSize; i++) {
@@ -55,6 +56,8 @@ public class PageInformation implements Serializable {
             addIfPossible(list, pageNumber + 3);
             addIfPossible(list, pageNumber + 4);
 
+            setNumberGroupCount(1);
+
         } else if (navigationCount == 2) {
             //this.navigationNumber = new Integer[]{pageNumber - 1, pageNumber, pageNumber + 1, pageNumber + 2, pageNumber + 3};
             addIfPossible(list, pageNumber - 1);
@@ -62,6 +65,8 @@ public class PageInformation implements Serializable {
             addIfPossible(list, pageNumber + 1);
             addIfPossible(list, pageNumber + 2);
             addIfPossible(list, pageNumber + 3);
+
+            setNumberGroupCount(2);
         } else if (navigationCount == 3) {
 //            this.navigationNumber = new Integer[]{pageNumber - 2, pageNumber - 1, pageNumber, pageNumber + 1, pageNumber + 2};
             addIfPossible(list, pageNumber - 2);
@@ -69,6 +74,8 @@ public class PageInformation implements Serializable {
             addIfPossible(list, pageNumber);
             addIfPossible(list, pageNumber + 1);
             addIfPossible(list, pageNumber + 2);
+
+            setNumberGroupCount(3);
         } else if (navigationCount == 4) {
 //            this.navigationNumber = new Integer[]{pageNumber - 3, pageNumber - 2, pageNumber - 1, pageNumber, pageNumber + 1};
             addIfPossible(list, pageNumber - 3);
@@ -76,6 +83,8 @@ public class PageInformation implements Serializable {
             addIfPossible(list, pageNumber - 1);
             addIfPossible(list, pageNumber);
             addIfPossible(list, pageNumber + 1);
+
+            setNumberGroupCount(4);
         } else if (navigationCount == 0) {
 //            this.navigationNumber = new Integer[]{pageNumber - 4, pageNumber - 3, pageNumber - 2, pageNumber - 1, pageNumber};
             addIfPossible(list, pageNumber - 4);
@@ -83,6 +92,8 @@ public class PageInformation implements Serializable {
             addIfPossible(list, pageNumber - 2);
             addIfPossible(list, pageNumber - 1);
             addIfPossible(list, pageNumber);
+
+            setNumberGroupCount(5);
         }
         this.navigationNumber = list.toArray(new Integer[list.size()]);
 
@@ -156,5 +167,13 @@ public class PageInformation implements Serializable {
 
     public void setEnableNext(boolean enableNext) {
         this.enableNext = enableNext;
+    }
+
+    public void setNumberGroupCount(int numberSetCount) {
+        this.numberGroupCount = numberSetCount;
+    }
+
+    public int getNumberGroupCount() {
+        return numberGroupCount;
     }
 }

@@ -72,4 +72,5 @@ public class PostCodeSearchControllerTest {
                 .andExpect(jsonPath("$contents[2].postCode").value("150703"))
         ;
     }
+
 }

@@ -8,26 +8,24 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width">
 <link rel="stylesheet" href="http://soopul.com/mullae/postcode/postcode.css">
-<h1>dev-1</h1>
 <section class="postcodeSearch">
         <h1>우편번호 목록</h1>
-        <form id="postcodeSearchForm" name="postcodeSearchForm" class="form" action="http://soopul.com" method="GET">
+        <form id="postcodeSearchForm" name="postcodeSearchForm" class="form" action="/postcode/search" method="GET">
                 <fieldset>
                         <legend>검색 카테고리 선택</legend>
-                        <label for="r1A">
-                                <input type="radio" name="r1" id="r1A" value="A" checked="checked">
+                        <label for="addressTypeA">
+                                <input type="radio" name="addressType" id="addressTypeA" value="PLAIN" checked="checked">
                                 <span class="rowh">주소</span>
                         </label>
-                        <br>
-                        <label for="r1R">
-                                <input type="radio" name="r1" id="r1R" value="R">
+                        <label for="addressTypeB">
+                                <input type="radio" name="addressType" id="addressTypeB" value="STREET">
                                 <span class="rowh">도로명</span>
                         </label>
                 </fieldset>
                 <p class="inputTextBox">
-                        <label for="t1">
+                        <label for="address">
                                 <span class="rowh">검색어 입력</span>
-                                <input type="text" name="t1" id="t1" placeholder="도로명 입력">
+                                <input type="text" name="address" id="address" placeholder="도로명 입력">
                                 <input type="submit" id="submit" value="조회">
                         </label>
                 </p>
@@ -41,9 +39,7 @@
 
 
 
-        <div id="resutls" class="results">
-                ${view}
-        </div><!-- #results -->
+        ${view}
 </section>
 
 <script src="http://soopul.com/mullae/postcode/res/postcode.js"></script></html>

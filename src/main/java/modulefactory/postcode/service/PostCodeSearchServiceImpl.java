@@ -19,7 +19,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @Service
-public class PostCodeSearchServiceImpl implements  PostCodeSearchService{
+public class PostCodeSearchServiceImpl implements PostCodeSearchService {
 
     private PlainPostCodeRepository plainPostCodeRepository;
 
@@ -41,10 +41,10 @@ public class PostCodeSearchServiceImpl implements  PostCodeSearchService{
         Page<PostCodeAddress> postCodeAddressList = null;
         //Paging 정보 구성하기
         Pageable pageRequest = createPageable(pageItemSize, pageNumber);
-        if("PLAIN".equals(addressType)){
+        if ("PLAIN".equals(addressType)) {
 //            postCodeAddressList = plainPostCodeRepository.findByAddress(address, pageRequest);
             postCodeAddressList = plainPostCodeRepository.findByAddress(address, pageRequest);
-        }else if("STREET".equals(addressType)){
+        } else if ("STREET".equals(addressType)) {
             postCodeAddressList = streetPostCodeRepository.findPostCode(address, pageRequest);
         }
 
@@ -52,7 +52,7 @@ public class PostCodeSearchServiceImpl implements  PostCodeSearchService{
     }
 
     private Pageable createPageable(int pageItemSize, int pageNumber) {
-        PageRequest pageRequest = new PageRequest(pageNumber, pageItemSize);
+        PageRequest pageRequest = new PageRequest(pageNumber - 1, pageItemSize);
         return pageRequest;
     }
 }

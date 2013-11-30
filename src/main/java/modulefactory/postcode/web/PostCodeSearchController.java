@@ -1,6 +1,5 @@
 package modulefactory.postcode.web;
 
-import modulefactory.postcode.dusttemp.SampleDustView;
 import modulefactory.postcode.model.PlainPostCodeAddress;
 import modulefactory.postcode.model.PostCodeAddress;
 import modulefactory.postcode.model.StreetPostCodeAddress;
@@ -8,19 +7,15 @@ import modulefactory.postcode.resource.PageInformation;
 import modulefactory.postcode.resource.PostCodeResource;
 import modulefactory.postcode.resource.PostCodeResourceEntity;
 import modulefactory.postcode.service.PostCodeSearchService;
+import modulefactory.postcode.temp.SampleDustView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,7 +96,9 @@ public class PostCodeSearchController {
     }
 
     private PageInformation createPageInformation(int pageItemSize, int pageNumber, Page<PostCodeAddress> addressData) {
-        return new PageInformation(pageNumber, pageItemSize, addressData.getTotalElements(), addressData.getTotalPages());
+        PageInformation page = new PageInformation(pageNumber, pageItemSize, addressData.getTotalElements(), addressData.getTotalPages());
+        page.createPageNavigation(5);
+        return page;
     }
 
     private List<PostCodeResourceEntity> mapToResourceEntity(Page<PostCodeAddress> postCodeAddresses) {
@@ -109,7 +106,7 @@ public class PostCodeSearchController {
         for (PostCodeAddress address : postCodeAddresses) {
             PostCodeResourceEntity entity = new PostCodeResourceEntity();
             entity.setId(address.getId());
-            entity.setPostCode(address.getPostCode());
+            entity.setPostCode(withDash(address.getPostCode()));
 
             StringBuilder addressBuilder = new StringBuilder();
             addAddress(addressBuilder, address.getCityDoName());
@@ -129,6 +126,12 @@ public class PostCodeSearchController {
             entities.add(entity);
         }
         return entities;
+    }
+
+    private String withDash(String postCode) {
+        String front = postCode.substring(0, 3);
+        String back = postCode.substring(3, 6);
+        return front + "-" + back;
     }
 
     private void addAddress(StringBuilder addressBuilder, String addressText) {
