@@ -13,6 +13,7 @@ input, select {
 }
 
 
+table { width: 100%; }
 thead { background-color: #eee; }
 th, td { padding: .5em 1em; }
 
@@ -62,6 +63,7 @@ th, td { padding: .5em 1em; }
 
 .paging-nav {
 	padding-top: 1em; 
+	text-align: center; 
 
 	h1 { display: none; }
 	a {

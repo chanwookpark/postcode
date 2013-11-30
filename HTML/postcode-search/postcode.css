@@ -9,6 +9,9 @@ input, select {
   padding: 0;
   font-size: 1em; }
 
+table {
+  width: 100%; }
+
 thead {
   background-color: #eee; }
 
@@ -43,7 +46,8 @@ th, td {
     width: 60px; }
 
 .paging-nav {
-  padding-top: 1em; }
+  padding-top: 1em;
+  text-align: center; }
   .paging-nav h1 {
     display: none; }
   .paging-nav a {

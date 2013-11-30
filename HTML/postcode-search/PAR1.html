@@ -21,14 +21,12 @@
 				<col>
 			<thead>
 				<tr>
-					<th class="id">ID</th>
 					<th class="postCode">우편번호</th>
 					<th class="address">주소</th>
 			</thead>
 			<tbody>
 				<!-- {#contents} -->
 				<tr>
-					<th>{id}</th>
 					<td>{postCode}</td>
 					<td><a>{address}</a></td>
 				<!-- {/contents} -->
@@ -44,16 +42,18 @@
 						<a title="{selectKey}">이전</a> 
 					{/math}
 				{/enablePrevious}
-				{#navigationNumber}
+				{#navigationNumber len=navigationNumber.length}
 					{@eq key="{.}" value="{pageNumber}"}
 						<a class="on" title="{.}">{.}</a> 
 					{:else}
 						<a title="{.}">{.}</a> 
 					{/eq}
 				{/navigationNumber}
-				{?enableNext}
-					{@math key="{navigationNumber.length}" method="add" operand="1"}
-						<a title="{selectKey}">다음</a>
+				{?enableNext}	
+					{@math key="{navigationNumber.length}" method="multiply" operand="{numberGroupCount}"}
+						{@math key="{selectKey}" method="add" operand="1"}
+							<a title="{selectKey}">다음</a>
+						{/math}
 					{/math}
 				{/enableNext}
 			</div>

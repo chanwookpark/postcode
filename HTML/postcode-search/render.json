@@ -6,9 +6,10 @@ var renderJson = {
   //   "totalPage": 3
   // },
   "page": {
-    "pageNumber": 6,
-    "navigationNumber": [6,7,8,9],
-    "enableNext": false, 
+    "pageNumber": 18,
+    "navigationNumber": [16,17,18,19,20],
+    "numberGroupCount": 4,
+    "enableNext": true, 
     "enablePrevious": true
   },
   "addressType": "PLAIN",
@@ -37,31 +38,6 @@ var renderJson = {
       "id": 18,
       "postCode": "150704",
       "address": "서울특별시 영등포구 영등포4가 우리벤처타운 "
-    },
-    {
-      "id": 19,
-      "postCode": "150705",
-      "address": "서울특별시 영등포구 영등포5가 우리벤처타운 "
-    },
-    {
-      "id": 20,
-      "postCode": "150706",
-      "address": "서울특별시 영등포구 영등포6가 우리벤처타운 "
-    },
-    {
-      "id": 21,
-      "postCode": "150707",
-      "address": "서울특별시 영등포구 영등포7가 우리벤처타운 "
-    },
-    {
-      "id": 22,
-      "postCode": "150708",
-      "address": "서울특별시 영등포구 영등포8가 우리벤처타운 "
-    },
-    {
-      "id": 23,
-      "postCode": "150709",
-      "address": "서울특별시 영등포구 영등포9가 우리벤처타운 "
     }
   ]
 };
