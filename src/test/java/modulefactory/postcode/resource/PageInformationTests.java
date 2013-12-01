@@ -1,9 +1,10 @@
 package modulefactory.postcode.resource;
 
-import org.hamcrest.CoreMatchers;
+import modulefactory.postcode.page.PageInformation;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,76 +15,68 @@ import static org.hamcrest.CoreMatchers.*;
  */
 public class PageInformationTests {
 
+    public static final int NAVIGATION_SIZE = 5;
+    public static final int TOTAL_PAGE = 12;
+    public static final int TOTAL_COUNT = 60;
+
     @Test
-    public void createNavigation(){
-        PageInformation p = new PageInformation(1, 5, 60, 12);
-        p.createPageNavigation(5);
+    public void createNavigation() {
+        PageInformation p = new PageInformation(1, 5, TOTAL_COUNT, TOTAL_PAGE, NAVIGATION_SIZE);
         assertThat(p.getNavigationNumber(), is(new Integer[]{1, 2, 3, 4, 5}));
         assertThat(p.isEnablePrevious(), is(false));
         assertThat(p.isEnableNext(), is(true));
 
-        p = new PageInformation(2, 5, 60, 12);
-        p.createPageNavigation(5);
+        p = new PageInformation(2, 5, TOTAL_COUNT, TOTAL_PAGE, NAVIGATION_SIZE);
         assertThat(p.getNavigationNumber(), is(new Integer[]{1, 2, 3, 4, 5}));
         assertThat(p.isEnablePrevious(), is(false));
         assertThat(p.isEnableNext(), is(true));
 
-        p = new PageInformation(3, 5, 60, 12);
-        p.createPageNavigation(5);
+        p = new PageInformation(3, 5, TOTAL_COUNT, TOTAL_PAGE, NAVIGATION_SIZE);
         assertThat(p.getNavigationNumber(), is(new Integer[]{1, 2, 3, 4, 5}));
         assertThat(p.isEnablePrevious(), is(false));
         assertThat(p.isEnableNext(), is(true));
 
-        p = new PageInformation(4, 5, 60, 12);
-        p.createPageNavigation(5);
+        p = new PageInformation(4, 5, TOTAL_COUNT, TOTAL_PAGE, NAVIGATION_SIZE);
         assertThat(p.getNavigationNumber(), is(new Integer[]{1, 2, 3, 4, 5}));
         assertThat(p.isEnablePrevious(), is(false));
         assertThat(p.isEnableNext(), is(true));
 
-        p = new PageInformation(5, 5, 60, 12);
-        p.createPageNavigation(5);
+        p = new PageInformation(5, 5, TOTAL_COUNT, TOTAL_PAGE, NAVIGATION_SIZE);
         assertThat(p.getNavigationNumber(), is(new Integer[]{1, 2, 3, 4, 5}));
         assertThat(p.isEnablePrevious(), is(false));
         assertThat(p.isEnableNext(), is(true));
 
-        p = new PageInformation(6, 5, 60, 12);
-        p.createPageNavigation(5);
+        p = new PageInformation(6, 5, TOTAL_COUNT, TOTAL_PAGE, NAVIGATION_SIZE);
         assertThat(p.getNavigationNumber(), is(new Integer[]{6, 7, 8, 9, 10}));
         assertThat(p.isEnablePrevious(), is(true));
         assertThat(p.isEnableNext(), is(true));
 
-        p = new PageInformation(7, 5, 60, 12);
-        p.createPageNavigation(5);
+        p = new PageInformation(7, 5, TOTAL_COUNT, TOTAL_PAGE, NAVIGATION_SIZE);
         assertThat(p.getNavigationNumber(), is(new Integer[]{6, 7, 8, 9, 10}));
         assertThat(p.isEnablePrevious(), is(true));
         assertThat(p.isEnableNext(), is(true));
 
-        p = new PageInformation(8, 5, 60, 12);
-        p.createPageNavigation(5);
+        p = new PageInformation(8, 5, TOTAL_COUNT, TOTAL_PAGE, NAVIGATION_SIZE);
         assertThat(p.getNavigationNumber(), is(new Integer[]{6, 7, 8, 9, 10}));
         assertThat(p.isEnablePrevious(), is(true));
         assertThat(p.isEnableNext(), is(true));
 
-        p = new PageInformation(9, 5, 60, 12);
-        p.createPageNavigation(5);
+        p = new PageInformation(9, 5, TOTAL_COUNT, TOTAL_PAGE, NAVIGATION_SIZE);
         assertThat(p.getNavigationNumber(), is(new Integer[]{6, 7, 8, 9, 10}));
         assertThat(p.isEnablePrevious(), is(true));
         assertThat(p.isEnableNext(), is(true));
 
-        p = new PageInformation(10, 5, 60, 12);
-        p.createPageNavigation(5);
+        p = new PageInformation(10, 5, TOTAL_COUNT, TOTAL_PAGE, NAVIGATION_SIZE);
         assertThat(p.getNavigationNumber(), is(new Integer[]{6, 7, 8, 9, 10}));
         assertThat(p.isEnablePrevious(), is(true));
         assertThat(p.isEnableNext(), is(true));
 
-        p = new PageInformation(11, 5, 60, 12);
-        p.createPageNavigation(5);
+        p = new PageInformation(11, 5, TOTAL_COUNT, TOTAL_PAGE, NAVIGATION_SIZE);
         assertThat(p.getNavigationNumber(), is(new Integer[]{11, 12}));
         assertThat(p.isEnablePrevious(), is(true));
         assertThat(p.isEnableNext(), is(false));
 
-        p = new PageInformation(12, 5, 60, 12);
-        p.createPageNavigation(5);
+        p = new PageInformation(12, 5, TOTAL_COUNT, TOTAL_PAGE, NAVIGATION_SIZE);
         assertThat(p.getNavigationNumber(), is(new Integer[]{11, 12}));
         assertThat(p.isEnablePrevious(), is(true));
         assertThat(p.isEnableNext(), is(false));

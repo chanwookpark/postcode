@@ -1,11 +1,9 @@
 package modulefactory.postcode.web;
 
-import modulefactory.postcode.model.PlainPostCodeAddress;
 import modulefactory.postcode.model.PostCodeAddress;
-import modulefactory.postcode.model.StreetPostCodeAddress;
-import modulefactory.postcode.resource.PageInformation;
+import modulefactory.postcode.page.PageInformation;
+import modulefactory.postcode.page.PageValidator;
 import modulefactory.postcode.resource.PostCodeResource;
-import modulefactory.postcode.resource.PostCodeResourceEntity;
 import modulefactory.postcode.service.PostCodeSearchService;
 import modulefactory.postcode.temp.SampleDustView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +13,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 우편번호 찾기
@@ -42,51 +37,21 @@ public class PostCodeSearchController {
         return "search/view";
     }
 
-    /*
-        @RequestMapping(value = "/search", method = RequestMethod.GET)
-        @ResponseBody
-        public ResponseEntity<PostCodeResource> searchPostCode(
-                @RequestParam(value = "address") String address, @RequestParam(value = "addressType") String addressType,
-                @RequestParam(value = "_pageItemSize", required = false, defaultValue = "10") int pageItemSize,
-                @RequestParam(value = "_pageNumber", required = false, defaultValue = "0") int pageNumber) {
-
-            // Repository 조회 전에 파라미터 구성하기
-            final Page<PostCodeAddress> addressData = searchService.search(address, addressType, pageItemSize, pageNumber);
-
-            //TODO 별도로 뽑아내 정리해내기 (model to resource)
-    //        ModelMapper mapper = new ModelMapper();
-    //        Type targetListType = new TypeToken<List<PostCodeResourceEntity>>() {}.getType();
-    //        List<PostCodeResourceEntity> responseEntities = mapper.map(postCodeAddresses.getContent(), targetListType);
-            List<PostCodeResourceEntity> responseEntities = mapToResourceEntity(addressData);
-            PostCodeResource resource =
-                    new PostCodeResource(responseEntities,
-                            new PageInformation(pageNumber, pageItemSize, addressData.getTotalElements(), addressData.getTotalPages()));
-            resource.setAddressType(addressType);
-
-            ResponseEntity<PostCodeResource> responseResource = new ResponseEntity<PostCodeResource>(resource, HttpStatus.OK);
-
-            return responseResource;
-        }
-    */
-
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String searchPostCode(
             @RequestParam(value = "address") String address, @RequestParam(value = "addressType") String addressType,
             @RequestParam(value = "_pageItemSize", required = false, defaultValue = "10") int pageItemSize,
-            @RequestParam(value = "_pageNumber", required = false, defaultValue = "0") int pageNumber, ModelMap model) {
+            @RequestParam(value = "_pageNumber", required = false, defaultValue = "1") int pageNumber,
+            @RequestParam(value = "_navigationSize", required = false, defaultValue = "0") int navigationSize,
+            ModelMap model) {
+
+        new PageValidator().validate(pageItemSize, pageNumber, navigationSize);
 
         // Repository 조회 전에 파라미터 구성하기
         final Page<PostCodeAddress> addressData = searchService.search(address, addressType, pageItemSize, pageNumber);
 
-        //TODO 별도로 뽑아내 정리해내기 (model to resource)
-//        ModelMapper mapper = new ModelMapper();
-//        Type targetListType = new TypeToken<List<PostCodeResourceEntity>>() {}.getType();
-//        List<PostCodeResourceEntity> responseEntities = mapper.map(postCodeAddresses.getContent(), targetListType);
-        List<PostCodeResourceEntity> responseEntities = mapToResourceEntity(addressData);
-        PostCodeResource resource =
-                new PostCodeResource(responseEntities,
-                        createPageInformation(pageItemSize, pageNumber, addressData));
-        resource.setAddressType(addressType);
+        PageInformation page = new PageInformation(pageNumber, pageItemSize, addressData.getTotalElements(), addressData.getTotalPages(), navigationSize);
+        PostCodeResource resource = new PostCodeResource(addressData, page, addressType);
 
         model.put(SampleDustView.CONTENT_KEY, resource);
         model.put(SampleDustView.TEMPLATE_KEY, "postcode-search");
@@ -94,50 +59,5 @@ public class PostCodeSearchController {
 
         return "/search/result";
     }
-
-    private PageInformation createPageInformation(int pageItemSize, int pageNumber, Page<PostCodeAddress> addressData) {
-        PageInformation page = new PageInformation(pageNumber, pageItemSize, addressData.getTotalElements(), addressData.getTotalPages());
-        page.createPageNavigation(5);
-        return page;
-    }
-
-    private List<PostCodeResourceEntity> mapToResourceEntity(Page<PostCodeAddress> postCodeAddresses) {
-        List<PostCodeResourceEntity> entities = new ArrayList<PostCodeResourceEntity>();
-        for (PostCodeAddress address : postCodeAddresses) {
-            PostCodeResourceEntity entity = new PostCodeResourceEntity();
-            entity.setId(address.getId());
-            entity.setPostCode(withDash(address.getPostCode()));
-
-            StringBuilder addressBuilder = new StringBuilder();
-            addAddress(addressBuilder, address.getCityDoName());
-            addAddress(addressBuilder, address.getSiGunGuName());
-
-            if (address.isStreetAddress()) {
-                StreetPostCodeAddress streetAddress = (StreetPostCodeAddress) address;
-                addAddress(addressBuilder, streetAddress.getStreetName());
-                addAddress(addressBuilder, streetAddress.getStreetDetailName());
-                addAddress(addressBuilder, streetAddress.getBuildingName());
-            } else {
-                PlainPostCodeAddress plainAddress = (PlainPostCodeAddress) address;
-                addAddress(addressBuilder, plainAddress.getEupMyeonDongRiName());
-                addAddress(addressBuilder, plainAddress.getDetailAddress());
-            }
-            entity.setAddress(addressBuilder.toString());
-            entities.add(entity);
-        }
-        return entities;
-    }
-
-    private String withDash(String postCode) {
-        String front = postCode.substring(0, 3);
-        String back = postCode.substring(3, 6);
-        return front + "-" + back;
-    }
-
-    private void addAddress(StringBuilder addressBuilder, String addressText) {
-        addressBuilder.append(addressText);
-        addressBuilder.append(" ");
-    }
-
 
 }

@@ -41,7 +41,6 @@ public class WebContextConfig extends WebMvcConfigurerAdapter {
         viewResolver.setPrefix("/WEB-INF/pages/");
         viewResolver.setSuffix(".jsp");
         viewResolver.setViewClass(SampleDustView.class);
-//        viewResolver.setViewClass(JstlView.class);
         return viewResolver;
     }
 

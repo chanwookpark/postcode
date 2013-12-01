@@ -1,5 +1,7 @@
 package modulefactory.postcode.resource;
 
+import modulefactory.postcode.page.PageInformation;
+
 import java.io.Serializable;
 
 /**

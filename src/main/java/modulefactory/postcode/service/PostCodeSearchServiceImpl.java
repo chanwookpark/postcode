@@ -52,7 +52,7 @@ public class PostCodeSearchServiceImpl implements PostCodeSearchService {
     }
 
     private Pageable createPageable(int pageItemSize, int pageNumber) {
-        PageRequest pageRequest = new PageRequest(pageNumber - 1, pageItemSize);
+        PageRequest pageRequest = new PageRequest(pageNumber, pageItemSize);
         return pageRequest;
     }
 }
