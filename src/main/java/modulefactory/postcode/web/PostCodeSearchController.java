@@ -42,7 +42,7 @@ public class PostCodeSearchController {
             @RequestParam(value = "address") String address, @RequestParam(value = "addressType") String addressType,
             @RequestParam(value = "_pageItemSize", required = false, defaultValue = "10") int pageItemSize,
             @RequestParam(value = "_pageNumber", required = false, defaultValue = "1") int pageNumber,
-            @RequestParam(value = "_navigationSize", required = false, defaultValue = "0") int navigationSize,
+            @RequestParam(value = "_navigationSize", required = false, defaultValue = "5") int navigationSize,
             ModelMap model) {
 
         new PageValidator().validate(pageItemSize, pageNumber, navigationSize);
