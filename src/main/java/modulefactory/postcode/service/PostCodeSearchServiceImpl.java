@@ -9,8 +9,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 /**
  * Created with IntelliJ IDEA.
  * User: chanwook
@@ -22,7 +20,6 @@ import java.util.List;
 public class PostCodeSearchServiceImpl implements PostCodeSearchService {
 
     private PlainPostCodeRepository plainPostCodeRepository;
-
     private StreetPostCodeRepository streetPostCodeRepository;
 
     @Autowired
@@ -52,7 +49,7 @@ public class PostCodeSearchServiceImpl implements PostCodeSearchService {
     }
 
     private Pageable createPageable(int pageItemSize, int pageNumber) {
-        PageRequest pageRequest = new PageRequest(pageNumber, pageItemSize);
+        PageRequest pageRequest = new PageRequest(pageNumber - 1, pageItemSize);
         return pageRequest;
     }
 }

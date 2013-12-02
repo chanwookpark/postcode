@@ -60,11 +60,11 @@ public class PostCodeSearchIntegrationTest {
                 .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(jsonPath("$contents[0].postCode").value("150700"))
+                .andExpect(jsonPath("$contents[0].postCode").value("150-700"))
                 .andExpect(jsonPath("$contents[0].address").value("서울특별시 영등포구 문래동0가 우리벤처타운 "))
-                .andExpect(jsonPath("$contents[1].postCode").value("150701"))
+                .andExpect(jsonPath("$contents[1].postCode").value("150-701"))
                 .andExpect(jsonPath("$contents[1].address").value("서울특별시 영등포구 문래동1가 우리벤처타운 "))
-                .andExpect(jsonPath("$contents[2].postCode").value("150702"))
+                .andExpect(jsonPath("$contents[2].postCode").value("150-702"))
                 .andExpect(jsonPath("$contents[2].address").value("서울특별시 영등포구 문래동2가 우리벤처타운 "))
         ;
     }
@@ -79,9 +79,9 @@ public class PostCodeSearchIntegrationTest {
                 .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))
-                .andExpect(jsonPath("$contents[0].postCode").value("135100"))
+                .andExpect(jsonPath("$contents[0].postCode").value("135-100"))
                 .andExpect(jsonPath("$contents[0].address").value("서울특별시 강남구 강남대로 150길 좋은빌딩 "))
-                .andExpect(jsonPath("$contents[1].postCode").value("135101"))
+                .andExpect(jsonPath("$contents[1].postCode").value("135-101"))
                 .andExpect(jsonPath("$contents[1].address").value("서울특별시 강남구 강남대로 151길 좋은빌딩 "))
         ;
     }
@@ -93,53 +93,57 @@ public class PostCodeSearchIntegrationTest {
 
         resultActions = mockMvc.perform(
                 get("/search")
-                        .param("address", "강남대로")
-                        .param("addressType", "STREET")
-                        .param("_pageItemSize", "3")
-                        .param("_pageNumber", "0")
+                    .param("address", "강남대로")
+                    .param("addressType", "STREET")
+                    .param("_pageItemSize", "3")
+                    .param("_pageNumber", "1")
+                    .accept(MediaType.parseMediaType("application/json;charset=UTF-8"))
         );
         resultActions
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$contents[0].postCode").value("135100"))
-                .andExpect(jsonPath("$contents[1].postCode").value("135101"))
-                .andExpect(jsonPath("$contents[2].postCode").value("135102"))
+                .andExpect(jsonPath("$contents[0].postCode").value("135-100"))
+                .andExpect(jsonPath("$contents[1].postCode").value("135-101"))
+                .andExpect(jsonPath("$contents[2].postCode").value("135-102"))
         ;
 
         mockMvc.perform(
                 get("/search")
-                        .param("address", "강남대로")
-                        .param("addressType", "STREET")
-                        .param("_pageItemSize", "3")
-                        .param("_pageNumber", "1")
+                    .param("address", "강남대로")
+                    .param("addressType", "STREET")
+                    .param("_pageItemSize", "3")
+                    .param("_pageNumber", "2")
+                    .accept(MediaType.parseMediaType("application/json;charset=UTF-8"))
                 )
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$contents[0].postCode").value("135103"))
-                .andExpect(jsonPath("$contents[1].postCode").value("135104"))
-                .andExpect(jsonPath("$contents[2].postCode").value("135105"))
+                .andExpect(jsonPath("$contents[0].postCode").value("135-103"))
+                .andExpect(jsonPath("$contents[1].postCode").value("135-104"))
+                .andExpect(jsonPath("$contents[2].postCode").value("135-105"))
         ;
 
         mockMvc.perform(
-                get("/postCode/search")
-                        .param("address", "강남대로")
-                        .param("addressType", "STREET")
-                        .param("_pageItemSize", "3")
-                        .param("_pageNumber", "2")
+                get("/search")
+                    .param("address", "강남대로")
+                    .param("addressType", "STREET")
+                    .param("_pageItemSize", "3")
+                    .param("_pageNumber", "3")
+                    .accept(MediaType.parseMediaType("application/json;charset=UTF-8"))
         )
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$contents[0].postCode").value("135106"))
-                .andExpect(jsonPath("$contents[1].postCode").value("135107"))
-                .andExpect(jsonPath("$contents[2].postCode").value("135108"))
+                .andExpect(jsonPath("$contents[0].postCode").value("135-106"))
+                .andExpect(jsonPath("$contents[1].postCode").value("135-107"))
+                .andExpect(jsonPath("$contents[2].postCode").value("135-108"))
         ;
 
         mockMvc.perform(
-                get("/postCode/search")
-                        .param("address", "강남대로")
-                        .param("addressType", "STREET")
-                        .param("_pageItemSize", "3")
-                        .param("_pageNumber", "3")
+                get("/search")
+                    .param("address", "강남대로")
+                    .param("addressType", "STREET")
+                    .param("_pageItemSize", "3")
+                    .param("_pageNumber", "4")
+                    .accept(MediaType.parseMediaType("application/json;charset=UTF-8"))
         )
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$contents[0].postCode").value("135109"))
+                .andExpect(jsonPath("$contents[0].postCode").value("135-109"))
         ;
     }
 
