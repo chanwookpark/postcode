@@ -23,14 +23,15 @@ th, td {
   position: relative;
   padding: 0 1em;
   border: 1px dotted red;
+  display: block;
   background-color: #FBF8EF; }
   ._conditional::before {
-    content: "conditional";
     position: absolute;
     top: 0;
     right: 0;
-    font-weight: bold;
-    color: red; }
+    color: red;
+    content: "conditional";
+    font-weight: bold; }
 
 .postcodeSearch {
   padding: .5em 1em;
@@ -40,8 +41,8 @@ th, td {
     display: block; }
   .postcodeSearch .results caption {
     display: none;
-    text-align: left;
-    caption-side: bottom; }
+    caption-side: bottom;
+    text-align: left; }
   .postcodeSearch .results thead .postCode {
     width: 60px; }
 
@@ -58,7 +59,7 @@ th, td {
     .paging-nav a:hover {
       border-color: #333; }
   .paging-nav .on {
-    font-weight: bold;
-    color: green;
+    border-color: #333;
     background-color: #eee;
-    border-color: #333; }
+    color: green;
+    font-weight: bold; }
