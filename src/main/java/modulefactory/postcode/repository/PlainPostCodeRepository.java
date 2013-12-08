@@ -20,7 +20,6 @@ public interface PlainPostCodeRepository extends JpaRepository<PlainPostCodeAddr
                    " p.eupMyeonDongRiName LIKE %:address% OR " +
                    " p.detailAddress LIKE %:address% "
     )
-//    List<PostCodeAddress> findByAddress(@Param("address") String address);
     Page<PostCodeAddress> findByAddress(@Param("address") String address, Pageable pageable);
 
 }

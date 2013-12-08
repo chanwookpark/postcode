@@ -1,6 +1,7 @@
 package modulefactory.postcode.config;
 
-import modulefactory.postcode.temp.SampleDustView;
+import framewise.dustview.HttpConnectDustViewTemplateLoader;
+import framewise.dustview.SimpleDustTemplateView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -66,14 +68,22 @@ public class WebContextConfig extends WebMvcConfigurerAdapter {
         return viewResolver;
     }
 
-    //    @Bean
+    @Bean
     public ViewResolver getDustViewResolver() {
         LOGGER.debug(">>> Setup View Resolver for JSP");
 
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/WEB-INF/pages/");
         viewResolver.setSuffix(".jsp");
-        viewResolver.setViewClass(SampleDustView.class);
+        viewResolver.setViewClass(SimpleDustTemplateView.class);
+
+        // set attribute for View instance
+        HashMap<String, Object> attributes = new HashMap<String, Object>();
+        attributes.put(SimpleDustTemplateView.TEMPLATE_LOADER, new HttpConnectDustViewTemplateLoader());
+        attributes.put(SimpleDustTemplateView.VIEW_PATH_PREFIX, "http://soopul.com/mullae/");
+        attributes.put(SimpleDustTemplateView.VIEW_PATH_SUFFIX, "/markup.js");
+        viewResolver.setAttributesMap(attributes);
+
         return viewResolver;
     }
 

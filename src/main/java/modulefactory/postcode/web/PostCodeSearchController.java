@@ -5,7 +5,6 @@ import modulefactory.postcode.page.PageInformation;
 import modulefactory.postcode.page.PageValidator;
 import modulefactory.postcode.resource.PostCodeResource;
 import modulefactory.postcode.service.PostCodeSearchService;
-import modulefactory.postcode.temp.SampleDustView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -16,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import static framewise.dustview.SimpleDustTemplateView.*;
 
 /**
  * 우편번호 찾기
@@ -33,14 +34,11 @@ public class PostCodeSearchController {
     }
 
     @RequestMapping(value = "/search.view", method = RequestMethod.GET)
-    public String viewSearchPage(ModelMap model) {
-        model.put(SampleDustView.CONTENT_KEY, "test");
-        model.put(SampleDustView.TEMPLATE_KEY, "postcode-search");
-        model.put(SampleDustView.VIEW_FILE_PATH, "mullae/postcode");
+    public String viewSearchPage() {
         return "search/view";
     }
 
-    @RequestMapping(value = "/search", method = RequestMethod.GET, consumes = {"text/plain", "text/html"})
+    @RequestMapping(value = "/search", method = RequestMethod.GET, produces= {"text/plain", "text/html", "*/*"})
     public String searchPostCodeForView(
             @RequestParam(value = "address") String address, @RequestParam(value = "addressType") String addressType,
             @RequestParam(value = "_pageItemSize", required = false, defaultValue = "10") int pageItemSize,
@@ -50,14 +48,14 @@ public class PostCodeSearchController {
 
         PostCodeResource resource = getPostCodeResource(address, addressType, pageItemSize, pageNumber, navigationSize);
 
-        model.put(SampleDustView.CONTENT_KEY, resource);
-        model.put(SampleDustView.TEMPLATE_KEY, "postcode-search");
-        model.put(SampleDustView.VIEW_FILE_PATH, "mullae/postcode");
+        model.put(DATA_KEY, resource);
+        model.put(TEMPLATE_KEY, "postcode-search");
+        model.put(VIEW_PATH, "postcode");
 
-        return "/search/result";
+        return "search/result";
     }
 
-    @RequestMapping(value = "/search", method = RequestMethod.GET, consumes = {"application/*"})
+    @RequestMapping(value = "/search", method = RequestMethod.GET, produces = {"application/*"})
     @ResponseBody
     public ResponseEntity<PostCodeResource> searchPostCode(
             @RequestParam(value = "address") String address, @RequestParam(value = "addressType") String addressType,
