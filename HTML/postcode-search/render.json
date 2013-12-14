@@ -5,12 +5,22 @@ var renderJson = {
   //   "totalCount": 30,
   //   "totalPage": 3
   // },
+  // "page": {
+  //   "pageNumber": 18,
+  //   "navigationNumber": [16,17,18,19,20],
+  //   "numberGroupCount": 4,
+  //   "enableNext": true, 
+  //   "enablePrevious": true
+  // },
   "page": {
-    "pageNumber": 18,
-    "navigationNumber": [16,17,18,19,20],
-    "numberGroupCount": 4,
-    "enableNext": true, 
-    "enablePrevious": true
+    "pageNumber":1,
+    "pageSize":5,
+    "totalCount":55,
+    "totalPage":11,
+    "navigationNumber":[1,2,3,4,5],
+    "enablePrevious":false,
+    "enableNext":true,
+    "numberGroupCount":1
   },
   "addressType": "PLAIN",
   "contents": [
