@@ -37,7 +37,9 @@
                 </p>
         </form>
 
-        ${_view}
+        <div id="results">
+              ${_view}  
+        </div>
 </section>
 
 <script src="http://soopul.com/mullae/postcode/res/postcode.js"></script></html>
