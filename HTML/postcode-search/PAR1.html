@@ -9,7 +9,7 @@
 
 
 <div id="dustm">
-	<section id="results" class="results type_{addressType}">
+	<section class="results type_{addressType}">
 		<h1>검색결과</h1>
 		<table id="postcodeResultTable">
 			<caption>
@@ -50,7 +50,7 @@
 					{/eq}
 				{/navigationNumber}
 				{?enableNext}	
-					{@math key="{navigationNumber.length}" method="multiply" operand="{numberGroupCount}"}
+					{@math key="{pageSize}" method="multiply" operand="{numberGroupCount}"}
 						{@math key="{selectKey}" method="add" operand="1"}
 							<a title="{selectKey}">다음</a>
 						{/math}
