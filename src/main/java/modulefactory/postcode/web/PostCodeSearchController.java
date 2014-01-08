@@ -1,8 +1,8 @@
 package modulefactory.postcode.web;
 
+import framewise.page.PageInformation;
+import framewise.page.PageValidator;
 import modulefactory.postcode.model.PostCodeAddress;
-import modulefactory.postcode.page.PageInformation;
-import modulefactory.postcode.page.PageValidator;
 import modulefactory.postcode.resource.PostCodeResource;
 import modulefactory.postcode.service.PostCodeSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +49,8 @@ public class PostCodeSearchController {
         PostCodeResource resource = getPostCodeResource(address, addressType, pageItemSize, pageNumber, navigationSize);
 
         model.put(DATA_KEY, resource);
-        model.put(TEMPLATE_KEY, "postcode-search");
-        model.put(VIEW_PATH, "postcode");
+        model.put(TEMPLATE_KEY, "postcode-results");
+        model.put(VIEW_PATH_OVERRIDE, "https://raw.github.com/githkdh/githkdh.github.io/master/hosting/dust/postcode.markup.js");
 
         return "search/result";
     }

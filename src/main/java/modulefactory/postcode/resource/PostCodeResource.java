@@ -1,9 +1,9 @@
 package modulefactory.postcode.resource;
 
+import framewise.page.PageInformation;
 import modulefactory.postcode.model.PlainPostCodeAddress;
 import modulefactory.postcode.model.PostCodeAddress;
 import modulefactory.postcode.model.StreetPostCodeAddress;
-import modulefactory.postcode.page.PageInformation;
 import org.springframework.data.domain.Page;
 
 import java.util.ArrayList;

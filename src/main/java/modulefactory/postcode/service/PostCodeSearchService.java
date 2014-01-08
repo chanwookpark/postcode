@@ -3,8 +3,6 @@ package modulefactory.postcode.service;
 import modulefactory.postcode.model.PostCodeAddress;
 import org.springframework.data.domain.Page;
 
-import java.util.List;
-
 /**
  * Created with IntelliJ IDEA.
  * User: chanwook

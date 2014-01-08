@@ -6,7 +6,7 @@
     <version>0.1</version>
     <packaging>war</packaging>
     <name>PostCode</name>
-    <description>PostCode</description>
+    <description>우편번호 조회 모듈</description>
     <url>https://github.com/modulefactory/postcode</url>
     <licenses>
         <license>
@@ -207,10 +207,17 @@
             <version>1.7R4</version>
         </dependency>
 
-        <!-- Dust -->
+        <!-- framewise:Dust -->
         <dependency>
             <groupId>framewise</groupId>
             <artifactId>dustview</artifactId>
+            <version>0.1</version>
+        </dependency>
+
+        <!-- framewise:Page -->
+        <dependency>
+            <groupId>framewise</groupId>
+            <artifactId>page</artifactId>
             <version>0.1</version>
         </dependency>
 

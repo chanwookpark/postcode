@@ -1,6 +1,6 @@
 package modulefactory.postcode.config;
 
-import framewise.dustview.HttpConnectDustViewTemplateLoader;
+import framewise.dustview.HttpConnectDustTemplateLoader;
 import framewise.dustview.SimpleDustTemplateView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,7 +79,7 @@ public class WebContextConfig extends WebMvcConfigurerAdapter {
 
         // set attribute for View instance
         HashMap<String, Object> attributes = new HashMap<String, Object>();
-        attributes.put(SimpleDustTemplateView.TEMPLATE_LOADER, new HttpConnectDustViewTemplateLoader());
+        attributes.put(SimpleDustTemplateView.TEMPLATE_LOADER, new HttpConnectDustTemplateLoader());
         attributes.put(SimpleDustTemplateView.VIEW_PATH_PREFIX, "http://soopul.com/mullae/");
         attributes.put(SimpleDustTemplateView.VIEW_PATH_SUFFIX, "/markup.js");
         viewResolver.setAttributesMap(attributes);
