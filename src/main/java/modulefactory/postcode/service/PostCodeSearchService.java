@@ -1,5 +1,6 @@
 package modulefactory.postcode.service;
 
+import framewise.page.PagingParam;
 import modulefactory.postcode.model.PostCodeAddress;
 import org.springframework.data.domain.Page;
 
@@ -12,5 +13,5 @@ import org.springframework.data.domain.Page;
  */
 public interface PostCodeSearchService {
 
-    Page<PostCodeAddress> search(String address, String addressType, int pageItemSize, int pageNumber);
+    Page<PostCodeAddress> search(String address, String addressType, PagingParam paging);
 }

@@ -21,7 +21,7 @@ import static org.junit.Assert.assertThat;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = AppContextConfig.class)
-public class RepositoryTests {
+public class RepositoryTest {
 
     @Autowired
     private PlainPostCodeRepository repository;

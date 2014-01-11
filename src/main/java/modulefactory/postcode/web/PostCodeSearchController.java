@@ -2,6 +2,7 @@ package modulefactory.postcode.web;
 
 import framewise.page.PageInformation;
 import framewise.page.PageValidator;
+import framewise.page.PagingParam;
 import modulefactory.postcode.model.PostCodeAddress;
 import modulefactory.postcode.resource.PostCodeResource;
 import modulefactory.postcode.service.PostCodeSearchService;
@@ -38,15 +39,13 @@ public class PostCodeSearchController {
         return "search/view";
     }
 
-    @RequestMapping(value = "/search", method = RequestMethod.GET, produces= {"text/plain", "text/html", "*/*"})
+    @RequestMapping(value = "/search", method = RequestMethod.GET, produces = {"text/plain", "text/html", "*/*"})
     public String searchPostCodeForView(
-            @RequestParam(value = "address") String address, @RequestParam(value = "addressType") String addressType,
-            @RequestParam(value = "_pageItemSize", required = false, defaultValue = "10") int pageItemSize,
-            @RequestParam(value = "_pageNumber", required = false, defaultValue = "1") int pageNumber,
-            @RequestParam(value = "_navigationSize", required = false, defaultValue = "5") int navigationSize,
-            ModelMap model) {
+            @RequestParam(value = "address") String address,
+            @RequestParam(value = "addressType") String addressType,
+            PagingParam paging, ModelMap model) {
 
-        PostCodeResource resource = getPostCodeResource(address, addressType, pageItemSize, pageNumber, navigationSize);
+        PostCodeResource resource = getPostCodeResource(address, addressType, paging);
 
         model.put(DATA_KEY, resource);
         model.put(TEMPLATE_KEY, "postcode-results");
@@ -59,22 +58,20 @@ public class PostCodeSearchController {
     @ResponseBody
     public ResponseEntity<PostCodeResource> searchPostCode(
             @RequestParam(value = "address") String address, @RequestParam(value = "addressType") String addressType,
-            @RequestParam(value = "_pageItemSize", required = false, defaultValue = "10") int pageItemSize,
-            @RequestParam(value = "_pageNumber", required = false, defaultValue = "1") int pageNumber,
-            @RequestParam(value = "_navigationSize", required = false, defaultValue = "5") int navigationSize) {
+            PagingParam paging) {
 
-        PostCodeResource resource = getPostCodeResource(address, addressType, pageItemSize, pageNumber, navigationSize);
+        PostCodeResource resource = getPostCodeResource(address, addressType, paging);
 
         return new ResponseEntity<PostCodeResource>(resource, HttpStatus.OK);
     }
 
-    private PostCodeResource getPostCodeResource(String address, String addressType, int pageItemSize, int pageNumber, int navigationSize) {
-        new PageValidator().validate(pageItemSize, pageNumber, navigationSize);
+    public PostCodeResource getPostCodeResource(String address, String addressType, PagingParam paging) {
+        new PageValidator().validate(paging);
 
         // Repository 조회 전에 파라미터 구성하기
-        final Page<PostCodeAddress> addressData = searchService.search(address, addressType, pageItemSize, pageNumber);
+        final Page<PostCodeAddress> addressData = searchService.search(address, addressType, paging);
 
-        PageInformation page = new PageInformation(pageNumber, pageItemSize, addressData.getTotalElements(), addressData.getTotalPages(), navigationSize);
+        PageInformation page = new PageInformation(paging.getPageNumber(), paging.getPageItemSize(), addressData.getTotalElements(), addressData.getTotalPages(), paging.getNavigationSize());
         return new PostCodeResource(addressData, page, addressType);
     }
 

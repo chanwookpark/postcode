@@ -1,5 +1,6 @@
 package modulefactory.postcode.web;
 
+import framewise.page.PagingParam;
 import modulefactory.postcode.config.AppContextConfig;
 import modulefactory.postcode.config.WebContextConfig;
 import modulefactory.postcode.model.PlainPostCodeAddress;
@@ -58,7 +59,7 @@ public class PostCodeSearchControllerTest {
             add(new PlainPostCodeAddress("150702", "서울특별시", "영등포구", "문래동2가", "우리벤처타운"));
             add(new PlainPostCodeAddress("150703", "서울특별시", "영등포구", "문래동3가", "우리벤처타운"));
         }});
-        when(service.search("문래", "PLAIN", 0, 10)).thenReturn(page);
+        when(service.search("문래", "PLAIN", new PagingParam(0, 10, 5))).thenReturn(page);
 
         resultActions = mockMvc.perform(get("/postCode/search?address=문래&addressType=PLAIN").accept(MediaType.parseMediaType("application/json;charset=UTF-8")));
         resultActions

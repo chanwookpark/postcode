@@ -1,5 +1,6 @@
 package modulefactory.postcode.service;
 
+import framewise.page.PagingParam;
 import modulefactory.postcode.model.PostCodeAddress;
 import modulefactory.postcode.repository.PlainPostCodeRepository;
 import modulefactory.postcode.repository.StreetPostCodeRepository;
@@ -33,13 +34,12 @@ public class PostCodeSearchServiceImpl implements PostCodeSearchService {
     }
 
     @Override
-    public Page<PostCodeAddress> search(String address, String addressType, int pageItemSize, int pageNumber) {
+    public Page<PostCodeAddress> search(String address, String addressType, PagingParam paging) {
 
         Page<PostCodeAddress> postCodeAddressList = null;
         //Paging 정보 구성하기
-        Pageable pageRequest = createPageable(pageItemSize, pageNumber);
+        Pageable pageRequest = createPageable(paging);
         if ("PLAIN".equals(addressType)) {
-//            postCodeAddressList = plainPostCodeRepository.findByAddress(address, pageRequest);
             postCodeAddressList = plainPostCodeRepository.findByAddress(address, pageRequest);
         } else if ("STREET".equals(addressType)) {
             postCodeAddressList = streetPostCodeRepository.findPostCode(address, pageRequest);
@@ -48,8 +48,9 @@ public class PostCodeSearchServiceImpl implements PostCodeSearchService {
         return postCodeAddressList;
     }
 
-    private Pageable createPageable(int pageItemSize, int pageNumber) {
-        PageRequest pageRequest = new PageRequest(pageNumber - 1, pageItemSize);
+    private Pageable createPageable(PagingParam paging) {
+        PageRequest pageRequest = new PageRequest(paging.getPageNumber() - 1, paging.getPageItemSize());
         return pageRequest;
     }
+
 }
