@@ -6,7 +6,7 @@
     <version>0.1</version>
     <packaging>war</packaging>
     <name>PostCode</name>
-    <description>PostCode</description>
+    <description>우편번호 조회 모듈</description>
     <url>https://github.com/modulefactory/postcode</url>
     <licenses>
         <license>
@@ -29,31 +29,26 @@
         <url>https://github.com/modulefactory/postcode</url>
     </scm>
 
+    <!--
     <distributionManagement>
         <snapshotRepository>
             <id>sonatype-nexus-snapshots</id>
-            <name>Sonatype Nexus snapshot repository</name>
+            <name>Sonatype Nexus snapshot plainPostCodeRepository</name>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
-        <repository>
+        <plainPostCodeRepository>
             <id>sonatype-nexus-staging</id>
-            <name>Sonatype Nexus release repository</name>
+            <name>Sonatype Nexus release plainPostCodeRepository</name>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
+        </plainPostCodeRepository>
     </distributionManagement>
+    -->
 
     <properties>
         <spring.version>3.2.5.RELEASE</spring.version>
     </properties>
 
     <dependencies>
-        <!-- Test -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-            <scope>test</scope>
-        </dependency>
 
         <!-- JEE -->
         <dependency>
@@ -62,12 +57,18 @@
             <version>3.0-alpha-1</version>
             <scope>provided</scope>
         </dependency>
-
+        <!--
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>javax.servlet.jsp-api</artifactId>
             <version>2.2.1</version>
             <scope>provided</scope>
+        </dependency>
+        -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
         </dependency>
 
         <!-- log -->
@@ -108,7 +109,7 @@
 
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
+            <artifactId>spring-tx</artifactId>
             <version>${spring.version}</version>
         </dependency>
 
@@ -116,6 +117,115 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--JSON-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.2.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.2.3</version>
+        </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.9.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+
+        <!-- Persistence -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>1.4.2.RELEASE</version>
+        </dependency>
+
+        <!--
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.0-api</artifactId>
+            <version>1.0.1.Final</version>
+        </dependency>
+        -->
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>3.6.10.Final</version>
+        </dependency>
+
+        <!-- DB -->
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>1.8.0.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>c3p0</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.1.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.27</version>
+        </dependency>
+
+        <!-- Util -->
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>0.6.2</version>
+        </dependency>
+
+        <!-- Web -->
+        <dependency>
+            <groupId>org.mozilla</groupId>
+            <artifactId>rhino</artifactId>
+            <version>1.7R4</version>
+        </dependency>
+
+        <!-- framewise:Dust -->
+        <dependency>
+            <groupId>framewise</groupId>
+            <artifactId>dustview</artifactId>
+            <version>0.1</version>
+        </dependency>
+
+        <!-- framewise:Page -->
+        <dependency>
+            <groupId>framewise</groupId>
+            <artifactId>paging</artifactId>
+            <version>0.1-SNATPSHOT</version>
+        </dependency>
+
+        <!-- Google App Engine -->
+        <dependency>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-1.0-sdk</artifactId>
+            <version>1.8.8</version>
         </dependency>
     </dependencies>
 
@@ -126,8 +236,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
@@ -149,23 +259,21 @@
                     </includes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <!-- http port -->
+                    <port>9090</port>
+                    <!-- application path always starts with /-->
+                    <path>/postcode</path>
+                    <!-- URIEncoding -->
+                    <uriEncoding>UTF-8</uriEncoding>
+                    <!-- http://tomcat.apache.org/maven-plugin-2.2/run-mojo-features.html 참조 -->
+                </configuration>
+            </plugin>
         </plugins>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.tomcat.maven</groupId>
-                    <artifactId>tomcat7-maven-plugin</artifactId>
-                    <version>2.2</version>
-                    <configuration>
-                        <!-- http port -->
-                        <port>9090</port>
-                        <!-- application path always starts with /-->
-                        <path>/postcode</path>
-                        <!-- http://tomcat.apache.org/maven-plugin-2.2/run-mojo-features.html 참조 -->
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
     </build>
 
     <profiles>
