@@ -43,12 +43,13 @@ public class PostCodeSearchController {
     public String searchPostCodeForView(
             @RequestParam(value = "address") String address,
             @RequestParam(value = "addressType") String addressType,
+            @RequestParam(value = "_templateKey", defaultValue = "postcode-results") String templateKey,
             PagingParam paging, ModelMap model) {
 
         PostCodeResource resource = getPostCodeResource(address, addressType, paging);
 
         model.put(DATA_KEY, resource);
-        model.put(TEMPLATE_KEY, "postcode-results");
+        model.put(TEMPLATE_KEY, templateKey);
         model.put(VIEW_PATH_OVERRIDE, "https://raw.github.com/githkdh/githkdh.github.io/master/hosting/dust/postcode.markup.js");
 
         return "search/result";

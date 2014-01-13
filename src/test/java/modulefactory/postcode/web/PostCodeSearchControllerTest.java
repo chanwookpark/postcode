@@ -9,6 +9,7 @@ import modulefactory.postcode.service.PostCodeSearchService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Matchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -23,6 +24,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.ArrayList;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyObject;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -59,7 +62,7 @@ public class PostCodeSearchControllerTest {
             add(new PlainPostCodeAddress("150702", "서울특별시", "영등포구", "문래동2가", "우리벤처타운"));
             add(new PlainPostCodeAddress("150703", "서울특별시", "영등포구", "문래동3가", "우리벤처타운"));
         }});
-        when(service.search("문래", "PLAIN", new PagingParam(0, 10, 5))).thenReturn(page);
+        when(service.search("문래", "PLAIN", new PagingParam(1, 10, 5))).thenReturn(page);
 
         resultActions = mockMvc.perform(get("/postCode/search?address=문래&addressType=PLAIN").accept(MediaType.parseMediaType("application/json;charset=UTF-8")));
         resultActions
