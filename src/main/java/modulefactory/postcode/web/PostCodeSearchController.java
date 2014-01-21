@@ -1,5 +1,6 @@
 package modulefactory.postcode.web;
 
+import framewise.dustview.SimpleDustTemplateView;
 import framewise.page.PageInformation;
 import framewise.page.PageValidator;
 import framewise.page.PagingParam;
@@ -43,14 +44,14 @@ public class PostCodeSearchController {
     public String searchPostCodeForView(
             @RequestParam(value = "address") String address,
             @RequestParam(value = "addressType") String addressType,
-            @RequestParam(value = "_templateKey", defaultValue = "postcode-results") String templateKey,
+            @RequestParam(value = "_templateKey", defaultValue = "table1") String templateKey,
             PagingParam paging, ModelMap model) {
 
         PostCodeResource resource = getPostCodeResource(address, addressType, paging);
 
-        model.put(DATA_KEY, resource);
+        model.put(CONTENT_KEY, resource);
         model.put(TEMPLATE_KEY, templateKey);
-        model.put(VIEW_PATH_OVERRIDE, "https://raw.github.com/githkdh/githkdh.github.io/master/hosting/dust/postcode.markup.js");
+        model.put(VIEW_PATH_OVERRIDE, "http://soopul.com/git/dust/postcode.js");
 
         return "search/result";
     }
@@ -72,7 +73,7 @@ public class PostCodeSearchController {
         // Repository 조회 전에 파라미터 구성하기
         final Page<PostCodeAddress> addressData = searchService.search(address, addressType, paging);
 
-        PageInformation page = new PageInformation(paging.getPageNumber(), paging.getPageItemSize(), addressData.getTotalElements(), addressData.getTotalPages(), paging.getNavigationSize());
+        PageInformation page = new PageInformation(paging, addressData.getTotalElements(), addressData.getTotalPages());
         return new PostCodeResource(addressData, page, addressType);
     }
 
