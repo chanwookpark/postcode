@@ -51,9 +51,9 @@
     </section>
 </section>
 
-<script src="http://soopul.com/git/script/modernizr.custom.11001.js"></script>
+<script src="http://soopul.com/git/lib/modernizr.custom.11001.js"></script>
+<script src="http://soopul.com/git/lib/json2.js"></script>
 <script src="http://soopul.com/git/script/xhr.js"></script>
-<script src="http://soopul.com/git/script/json2.js"></script>
 <script src="http://soopul.com/git/script/postcode.js"></script>
 
 </body>
