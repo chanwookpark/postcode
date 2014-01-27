@@ -5,11 +5,7 @@ import framewise.page.PageInformation;
 import java.io.Serializable;
 
 /**
- * Created with IntelliJ IDEA.
- * User: chanwook
- * Date: 2013. 11. 25.
- * Time: 오전 8:18
- * To change this template use File | Settings | File Templates.
+ * @author chanwook
  */
 public abstract class ResourceSupport implements Serializable {
 

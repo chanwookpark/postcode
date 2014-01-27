@@ -1,0 +1,65 @@
+@charset "utf-8";
+body {
+  font-size: small;
+  font-family: Arial;
+  line-height: 1.4; }
+
+input, select {
+  margin: 0;
+  padding: 0;
+  font-size: 1em; }
+
+table {
+  width: 100%; }
+
+thead {
+  background-color: #eee; }
+
+th, td {
+  padding: .5em 1em; }
+
+._conditional {
+  /* 컨텐츠 양에 따라 노출될수도 그렇지 않을수도 있다 */
+  position: relative;
+  padding: 0 1em;
+  border: 1px dotted red;
+  display: block;
+  background-color: #FBF8EF; }
+  ._conditional::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: red;
+    content: "conditional";
+    font-weight: bold; }
+
+.postcodeSearch {
+  padding: .5em 1em;
+  border-top: 1px dashed #ccc;
+  border-bottom: 1px dashed #ccc; }
+  .postcodeSearch .inputTextBox .rowh {
+    display: block; }
+  .postcodeSearch .results caption {
+    display: none;
+    caption-side: bottom;
+    text-align: left; }
+  .postcodeSearch .results thead .postCode {
+    width: 60px; }
+
+.paging-nav {
+  padding-top: 1em;
+  text-align: center; }
+  .paging-nav h1 {
+    display: none; }
+  .paging-nav a {
+    display: inline-block;
+    padding: .4em .8em;
+    border: 1px solid #ddd;
+    cursor: pointer; }
+    .paging-nav a:hover {
+      border-color: #333; }
+  .paging-nav .on {
+    border-color: #333;
+    background-color: #eee;
+    color: green;
+    font-weight: bold; }
