@@ -211,7 +211,7 @@
         <dependency>
             <groupId>framewise</groupId>
             <artifactId>dustview</artifactId>
-            <version>0.1</version>
+            <version>1.0.M2-SNAPSHOT</version>
         </dependency>
 
         <!-- framewise:Page -->
@@ -221,12 +221,15 @@
             <version>0.1-SNATPSHOT</version>
         </dependency>
 
-        <!-- Google App Engine -->
+        <!-- Performance Tests -->
         <dependency>
-            <groupId>com.google.appengine</groupId>
-            <artifactId>appengine-api-1.0-sdk</artifactId>
-            <version>1.8.8</version>
+            <groupId>com.newrelic.agent.java</groupId>
+            <artifactId>newrelic-java</artifactId>
+            <version>3.4.2</version>
+            <scope>provided</scope>
+            <type>zip</type>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -239,15 +242,6 @@
                     <source>1.7</source>
                     <target>1.7</target>
                     <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <!-- Release Plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.2.2</version>
-                <configuration>
-                    <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
                 </configuration>
             </plugin>
             <!-- Documentation -->
@@ -273,39 +267,35 @@
                     <!-- http://tomcat.apache.org/maven-plugin-2.2/run-mojo-features.html 참조 -->
                 </configuration>
             </plugin>
+            <!-- NewRelic -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>unpack-zip</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>com.newrelic.agent.java</groupId>
+                                    <artifactId>newrelic-java</artifactId>
+                                    <version>3.4.2</version>
+                                    <type>zip</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>target</outputDirectory>
+                                    <destFileName>newrelic</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                            <outputDirectory>/Users/chanwook/apps/newrelic</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>release-sign-artifacts</id>
-            <activation>
-                <property>
-                    <name>performRelease</name>
-                    <value>true</value>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.4</version>
-                        <configuration>
-                            <passphrase>${gpg.passphrase}</passphrase>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 </project>

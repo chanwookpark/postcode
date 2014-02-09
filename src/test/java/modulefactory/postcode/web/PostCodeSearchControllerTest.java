@@ -64,7 +64,8 @@ public class PostCodeSearchControllerTest {
         }});
         when(service.search("문래", "PLAIN", new PagingParam(1, 10, 5))).thenReturn(page);
 
-        resultActions = mockMvc.perform(get("/postCode/search?address=문래&addressType=PLAIN").accept(MediaType.parseMediaType("application/json;charset=UTF-8")));
+        resultActions = mockMvc.perform(get("/postCode/search?address=문래&addressType=PLAIN")
+                .accept(MediaType.parseMediaType("application/json;charset=UTF-8")));
         resultActions
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"))

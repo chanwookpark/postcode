@@ -81,10 +81,12 @@ public class WebContextConfig extends WebMvcConfigurerAdapter {
 
         // set attribute for View instance
         HashMap<String, Object> attributes = new HashMap<String, Object>();
+        attributes.put(SimpleDustTemplateView.DUST_JS_CORE_FILE_PATH, "/dust/dust-full-2.2.3.js");
+//        attributes.put(SimpleDustTemplateView.DUST_JS_HELPER_FILE_PATH, "/dust/dust-helpers-1.1.1.js");
         HttpConnectDustTemplateLoader dustTemplateLoader = new HttpConnectDustTemplateLoader();
         attributes.put(SimpleDustTemplateView.TEMPLATE_LOADER, dustTemplateLoader);
-        attributes.put(SimpleDustTemplateView.VIEW_PATH_PREFIX, "http://soopul.com/mullae/");
-        attributes.put(SimpleDustTemplateView.VIEW_PATH_SUFFIX, "/markup.js");
+        attributes.put(SimpleDustTemplateView.VIEW_PATH_PREFIX, "");
+        attributes.put(SimpleDustTemplateView.VIEW_PATH_SUFFIX, "");
         attributes.put(SimpleDustTemplateView.VIEW_CACHEABLE, "false");
         viewResolver.setAttributesMap(attributes);
 
