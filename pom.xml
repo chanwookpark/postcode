@@ -222,6 +222,7 @@
         </dependency>
 
         <!-- Performance Tests -->
+        <!--
         <dependency>
             <groupId>com.newrelic.agent.java</groupId>
             <artifactId>newrelic-java</artifactId>
@@ -229,6 +230,7 @@
             <scope>provided</scope>
             <type>zip</type>
         </dependency>
+        -->
 
     </dependencies>
 
@@ -268,6 +270,7 @@
                 </configuration>
             </plugin>
             <!-- NewRelic -->
+            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -291,11 +294,12 @@
                                     <destFileName>newrelic</destFileName>
                                 </artifactItem>
                             </artifactItems>
-                            <outputDirectory>/Users/chanwook/apps/newrelic</outputDirectory>
+                            <outputDirectory>/Users/chanwook/apps/newrelic/</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+            -->
         </plugins>
     </build>
 </project>
